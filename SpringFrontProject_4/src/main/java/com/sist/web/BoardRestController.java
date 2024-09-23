@@ -73,4 +73,28 @@ public class BoardRestController {
 	   
 	   return json;
    }
+   
+   @GetMapping(value="board/delete_vue.do",produces = "text/plain;charset=UTF-8")
+   public String board_delete(int no,String pwd)
+   {
+	   String result=dao.boardDelete(no, pwd);
+	   return result;
+   }
+   // EntityResponse<BoardVO> => 데이터 / 에러 
+   @GetMapping(value="board/update_vue.do",produces = "text/plain;charset=UTF-8")
+   public String board_update(int no) throws Exception
+   {
+	   BoardVO vo=dao.boardUpdateData(no);
+	   ObjectMapper mapper=new ObjectMapper();
+	   String json=mapper.writeValueAsString(vo);
+	   return json;
+   }
+   // 자바스크립트 = 자바 연동 
+   // 일반데이터 (자바와 동일) , List:[] , VO:{}
+   @PostMapping(value="board/update_ok_vue.do",produces = "text/plain;charset=UTF-8")
+   public String board_update_ok(BoardVO vo)
+   {
+	   String result=dao.boardUpdate(vo);
+	   return result;
+   }
 }

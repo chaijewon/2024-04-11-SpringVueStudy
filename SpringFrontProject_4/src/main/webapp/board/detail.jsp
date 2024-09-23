@@ -51,16 +51,21 @@
         </tr>
         <tr>
           <td colspan="4" class="text-right">
-            <a href="#" class="btn btn-xs btn-warning">수정</a>
-            <span class="btn btn-xs btn-info" id="delBtn">삭제</span>
+            <a :href="'update.do?no='+no" class="btn btn-xs btn-warning">수정</a>
+            <input type="button" 
+            class="btn btn-xs btn-info" @click="del()" value="삭제"
+            ref="delBtn"
+            >
             <a href="list.do" class="btn btn-xs btn-success">목록</a>
           </td>
         </tr>
-        <tr id="delTr" style="display:none">
+        <tr v-show="isShow">
           <td colspan="4" class="text-right">
           비밀번호:<input type=password v-model="pwd" ref="pwd" class="input-sm"
                  size=15>
-          <input type=button value="삭제" class="btn-sm btn-danger">
+          <input type=button value="삭제" class="btn-sm btn-danger"
+            ref="deleteBtn" v-on:click="boardDelete()"
+          >
           </td>
         </tr>
       </table>
@@ -73,13 +78,13 @@
     			vo:{},
     			no:${no},
     			pwd:'',
-    			index:0
+    			isShow:false
     		}
     	},
     	// detail_vue.do?no=39
     	mounted(){
     		//jquery 연동 => $(function(){}) 
-    		$('#delBtn').click(function(){
+    		/*$('#delBtn').click(function(){
     			if(this.index===0)
     			{
     			   this.index=1	
@@ -92,7 +97,7 @@
      			   $('#delTr').hide()
     			   this.index=0	
     			}
-    		})
+    		})*/
     		axios.get('http://localhost:8080/web/board/detail_vue.do',{
     			params:{
     				no:this.no
@@ -104,6 +109,48 @@
     		}).catch(error=>{
     			console.log(error.response)
     		})
+    	},
+    	methods:{
+    		del(){
+    			if(this.isShow===false)
+    			{
+    				this.isShow=true
+    				this.$refs.delBtn.value="취소"
+    			}
+    			else
+    			{
+    				this.isShow=false
+    				this.$refs.delBtn.value="삭제"
+    			}
+    		},
+    		boardDelete(){
+    			if(this.pwd==="")
+    			{
+    				this.$refs.pwd.focus()
+    				return
+    			}
+    			// 입력이 된 경우 => 서버연결  
+    			axios.get('http://localhost:8080/web/board/delete_vue.do',{
+    				params:{
+    					  no:this.no,
+    				      pwd:this.pwd
+    				}
+    			}).then(response=>{
+    				// 서버에서 전송된 결과값 읽기 
+    				if(response.data==='yes')
+    				{
+    					location.href="list.do"
+    				}
+    				else
+    				{
+    				    alert("비밀번호가 틀립니다!!")
+    				    this.$refs.pwd.value=""
+    				    this.$refs.pwd.focus()
+    				}
+    			}).catch(error=>{
+    				console.log(error.response) //에러에 대한 메세지 출력
+    			})
+    		}
     	}
     }).mount('.container')
    </script>

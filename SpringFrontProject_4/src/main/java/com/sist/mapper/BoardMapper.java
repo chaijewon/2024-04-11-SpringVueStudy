@@ -60,4 +60,15 @@ public interface BoardMapper {
   @Delete("DELETE FROM vue_board "
 		 +"WHERE no=#{no}")
   public void boardDelete(int no);
+  
+  // 수정 => 데이터 읽기 
+  @Select("SELECT name,subject,content "
+		 +"FROM vue_board "
+		 +"WHERE no=#{no}")
+  public BoardVO boardUpdateData(int no);
+  
+  @Update("UPDATE vue_board SET "
+		 +"name=#{name},subject=#{subject},content=#{content} "
+		 +"WHERE no=#{no}")
+  public void boardUpdate(BoardVO vo);
 }

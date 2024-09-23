@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -64,5 +65,54 @@ public class BoardDAO {
    {
 	   mapper.hitIncrement(no);
 	   return mapper.boardDetailData(no);
+   }
+   /*
+    *   // 비밀번호 검색 
+		  @Select("SELECT pwd FROM vue_board "
+				 +"WHERE no=#{no}")
+		  public String boardGetPassword(int no);
+		  // 실제 삭제 
+		  @Delete("DELETE FROM vue_board "
+				 +"WHERE no=#{no}")
+		  public void boardDelete(int no);
+    */
+   public String boardDelete(int no,String pwd)
+   {
+	   String result="no";
+	   String db_pwd=mapper.boardGetPassword(no);
+	   if(db_pwd.equals(pwd))
+	   {
+		   result="yes";
+		   mapper.boardDelete(no);
+	   }
+	   return result;
+   }
+   // 수정 
+   /*
+    *   @Select("SELECT name,subject,content "
+		 +"FROM vue_board "
+		 +"WHERE no=#{no}")
+        public BoardVO boardUpdateData(int no);
+    */
+   public BoardVO boardUpdateData(int no)
+   {
+	   return mapper.boardUpdateData(no);
+   }
+   /*
+    *   @Update("UPDATE vue_board SET "
+		 +"name=#{name},subject=#{subject},content=#{content} "
+		 +"WHERE no=#{no}")
+        public void boardUpdate(BoardVO vo);
+    */
+   public String boardUpdate(BoardVO vo)
+   {
+	   String result="no";
+	   String db_pwd=mapper.boardGetPassword(vo.getNo());
+	   if(db_pwd.equals(vo.getPwd()))
+	   {
+		   result="yes";
+		   mapper.boardUpdate(vo);
+	   }
+	   return result;
    }
 }

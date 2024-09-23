@@ -23,4 +23,10 @@ public class BoardController {
 	   model.addAttribute("no", no); // Vue에서 받는 방법 
 	   return "board/detail";
    }
+   @GetMapping("board/update.do")
+   public String board_update(int no,Model model)
+   {
+	   model.addAttribute("no", no);
+	   return "board/update";
+   }
 }
