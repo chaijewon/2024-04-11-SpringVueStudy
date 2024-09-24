@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.*;
@@ -44,5 +45,23 @@ public class DataBoardDAO {
    public void databoardInsert(DataBoardVO vo)
    {
 	   mapper.databoardInsert(vo);
+   }
+   /*
+    *   // 조회수 증가 
+	  @Update("UPDATE vue_databoard SET "
+			 +"hit=hit+1 "
+			 +"WHERE no=#{no}")
+	  public void hitIncrement(int no);
+	  // 게시물의 모든 데이터를 읽기
+	  @Select("SELECT no,name,subject,content,TO_CHAR(regdate,'yyyy-mm-dd hh24:mi:ss') as dbday,"
+			 +"filename,filesize,filecount "
+			 +"FROM vue_databoard "
+			 +"WHERE no=#{no}")
+	  public DataBoardVO databoardDetailData(int no);
+    */
+   public DataBoardVO databoardDetailData(int no)
+   {
+	   mapper.hitIncrement(no);
+	   return mapper.databoardDetailData(no);
    }
 }
