@@ -35,14 +35,19 @@
       </table>
       <table class="table">
         <tr>
+          <td colspan="5" class="text-right">
+            총 게시물 {{tcount}} 개 있습니다.
+          </td>
+        </tr>
+        <tr>
           <th width=10% class="text-center">번호</th>
           <th width=45% class="text-center">제목</th>
           <th width=15% class="text-center">이름</th>
           <th width=20% class="text-center">작성일</th>
           <th width=10% class="text-center">조회수</th>
         </tr>
-        <tr v-for="vo in board_list">
-          <td width=10% class="text-center">{{vo.no}}</td>
+        <tr v-for="(vo,index) in board_list">
+          <td width=10% class="text-center">{{count-index}}</td>
           <td width=45%><a :href="'detail.do?no='+vo.no">{{vo.subject}}</a>
             &nbsp;<sup v-if="today===vo.dbday"><img src="new.gif"></sup>
           </td>
@@ -83,7 +88,8 @@
 		         curpage:1,
 		         totalpage:0,
 		         count:0,
-		         today:''
+		         today:'',
+		         tcount:0
 		   }
 	   },
 	   // onload => 브라우저에 실행전에 => 서버에서 데이터를 받는다 
@@ -109,6 +115,7 @@
 				   this.totalpage=response.data.totalpage
 				   this.count=response.data.count
 				   this.today=response.data.today
+				   this.tcount=response.data.tcount
 			   })
 		   },
 		   prev(){

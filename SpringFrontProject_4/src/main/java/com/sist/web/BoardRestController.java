@@ -39,6 +39,7 @@ public class BoardRestController {
 	   map.put("curpage", page);
 	   map.put("totalpage", totalpage);
 	   map.put("count", count);
+	   map.put("tcount", dao.boardTotalPage());
 	   map.put("today", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 	   ObjectMapper mapper=new ObjectMapper();
 	   String json=mapper.writeValueAsString(map);
