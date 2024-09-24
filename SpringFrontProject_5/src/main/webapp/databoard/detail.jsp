@@ -61,7 +61,7 @@
         </tr>
         <tr>
           <td colspan="4" class="text-right">
-            <a href="#" class="btn btn-xs btn-warning">수정</a>
+            <a :href="'update.do?no='+vo.no" class="btn btn-xs btn-warning">수정</a>
             <input type="button" 
             class="btn btn-xs btn-info" value="삭제"
             @click="del" ref="delBtn"
@@ -132,6 +132,27 @@
     				return
     			}
     			// 삭제 요청 
+    			axios.get('delete_vue.do',{
+    				params:{
+    					no:this.no,
+    					pwd:this.pwd
+    				}
+    			// 결과값 읽기 => 요청 : 응답을 받는다 
+    			}).then(response=>{
+    				if(response.data==='yes')
+    				{
+    					location.href="list.do"
+    				}
+    				else
+    				{
+    					alert("비밀번호가 틀립니다")
+    				    this.pwd=""
+    				    this.$refs.pwd.focus()
+    				    
+    				}
+    			}).catch(error=>{
+    				console.log(error.response)
+    			})
     		}
     	}
     }).mount('.container')
