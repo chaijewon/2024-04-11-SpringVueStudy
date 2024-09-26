@@ -22,7 +22,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gradient-to-r from-indigo-500 text-center">
+<body class="from-indigo-500 text-center">
     <section>
         <div class="content-box ">
             <h1 class="text-4xl font-bold font-action">오늘의 지역별 날씨</h1>

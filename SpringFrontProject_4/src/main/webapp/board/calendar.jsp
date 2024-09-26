@@ -38,6 +38,7 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js
 	    var calendarEl = document.getElementById('calendar');
 	    var calendar = new FullCalendar.Calendar(calendarEl, {
 	    	initialView: 'dayGridMonth',
+	    	height:500,
 	    	headerToolbar: {
 	            left: 'prev,next today',
 	            center: 'title'
