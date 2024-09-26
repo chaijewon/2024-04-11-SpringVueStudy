@@ -198,85 +198,34 @@
                         <!-- Single Widget Area -->
                         <div class="single-widget-area about-me-widget text-center">
                             <div class="widget-title">
-                                <h6>About Me</h6>
+                                <h6>오늘의 쉐프</h6>
                             </div>
                             <div class="about-me-widget-thumb">
-                                <img src="../img/about-img/1.jpg" alt="">
+                                <img src="${cvo.poster }" alt="">
                             </div>
-                            <h4 class="font-shadow-into-light">Shopia Bernard</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+                            <h4 class="font-shadow-into-light">${cvo.chef }</h4>
+                            
                         </div>
 
-                        <!-- Single Widget Area -->
-                        <div class="single-widget-area subscribe_widget text-center">
-                            <div class="widget-title">
-                                <h6>Subscribe &amp; Follow</h6>
-                            </div>
-                            <div class="subscribe-link">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-google" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-vimeo" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
+                        
 
                         <!-- Single Widget Area -->
                         <div class="single-widget-area popular-post-widget">
                             <div class="widget-title text-center">
-                                <h6>Populer Post</h6>
+                                <h6>인기 맛집</h6>
                             </div>
                             <!-- Single Popular Post -->
+                            <c:forEach var="vo" items="${fList }">
                             <div class="single-populer-post d-flex">
-                                <img src="../img/sidebar-img/1.jpg" alt="">
+                                <img src="http://www.menupan.com${vo.poster }" alt="">
                                 <div class="post-content">
                                     <a href="#">
-                                        <h6>Top Wineries To Visit In England</h6>
+                                        <h6>${vo.name }</h6>
                                     </a>
-                                    <p>Tuesday, October 3, 2017</p>
+                                    <p>${vo.address }</p>
                                 </div>
                             </div>
-                            <!-- Single Popular Post -->
-                            <div class="single-populer-post d-flex">
-                                <img src="../img/sidebar-img/2.jpg" alt="">
-                                <div class="post-content">
-                                    <a href="#">
-                                        <h6>The 8 Best Gastro Pubs In Bath</h6>
-                                    </a>
-                                    <p>Tuesday, October 3, 2017</p>
-                                </div>
-                            </div>
-                            <!-- Single Popular Post -->
-                            <div class="single-populer-post d-flex">
-                                <img src="../img/sidebar-img/3.jpg" alt="">
-                                <div class="post-content">
-                                    <a href="#">
-                                        <h6>Zermatt Unplugged the best festival</h6>
-                                    </a>
-                                    <p>Tuesday, October 3, 2017</p>
-                                </div>
-                            </div>
-                            <!-- Single Popular Post -->
-                            <div class="single-populer-post d-flex">
-                                <img src="../img/sidebar-img/4.jpg" alt="">
-                                <div class="post-content">
-                                    <a href="#">
-                                        <h6>Harrogate's Top 10 Independent Eats</h6>
-                                    </a>
-                                    <p>Tuesday, October 3, 2017</p>
-                                </div>
-                            </div>
-                            <!-- Single Popular Post -->
-                            <div class="single-populer-post d-flex">
-                                <img src="../img/sidebar-img/5.jpg" alt="">
-                                <div class="post-content">
-                                    <a href="#">
-                                        <h6>Eating Out On A Budget In Oxford</h6>
-                                    </a>
-                                    <p>Tuesday, October 3, 2017</p>
-                                </div>
-                            </div>
+                           </c:forEach>        
                         </div>
 
                         <!-- Single Widget Area -->
@@ -298,9 +247,9 @@
                         <!-- Single Widget Area -->
                         <div class="single-widget-area newsletter-widget">
                             <div class="widget-title text-center">
-                                <h6>Newsletter</h6>
+                                <h6>맛집 뉴스</h6>
                             </div>
-                            <p>Subscribe our newsletter gor get notification about new updates, information discount, etc.</p>
+                            
                             <div class="newsletter-form">
                                 <form action="#" method="post">
                                     <input type="email" name="newsletter-email" id="email" placeholder="Your email">

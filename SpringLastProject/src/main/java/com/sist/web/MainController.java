@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sist.service.FoodService;
 import com.sist.service.RecipeService;
 /*
  *   정리 
@@ -102,15 +103,20 @@ public class MainController {
    // 필요한 클래스 => 스프링에서 가지고 온다 (객체 주소)
    @Autowired
    private RecipeService rService;
+   @Autowired
+   private FoodService fService;
    // 사용자에 요청 따라 => 처리 
    @GetMapping("main.do")
    public String main_main(Model model)
    {
 	   RecipeVO rvo=rService.recipeMaxHitData();
 	   List<RecipeVO> rList=rService.recipeHitTop8();
-	   
+	   List<FoodVO> fList=fService.foodHitTop5();
+	   ChefVO cvo=rService.chefToday();
+	   model.addAttribute("cvo", cvo);
 	   model.addAttribute("rvo", rvo);
 	   model.addAttribute("rList", rList);
+	   model.addAttribute("fList", fList);
 	   return "main";
    }
 }

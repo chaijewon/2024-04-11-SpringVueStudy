@@ -16,6 +16,6 @@ public interface RecipeMapper {
 		  +"FROM (SELECT no,title,poster,chef,hit,"
 		  +"(SELECT content FROM recipedetail WHERE no=recipe.no) as content "
 		  +"FROM recipe ORDER BY hit DESC) "
-		  +"WHERE rownum<=8")
+		  +"WHERE rownum<=8 AND hit!=(SELECT MAX(hit) FROM recipe)")
    public List<RecipeVO> recipeHitTop8();
 }
