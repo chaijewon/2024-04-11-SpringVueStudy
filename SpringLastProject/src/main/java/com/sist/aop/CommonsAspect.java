@@ -16,7 +16,7 @@ import com.sist.service.*;
 import com.sist.vo.*;
 @Aspect
 @Component
-//1111111lllllggg
+//1111111lllllggg1111vcvcv
 public class CommonsAspect {
    @Autowired
    private FoodService fService;
