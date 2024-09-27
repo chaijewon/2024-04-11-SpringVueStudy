@@ -19,6 +19,7 @@ import com.sist.vo.*;
 public class CommonsAspect {
    @Autowired
    private FoodService fService;
+   
    // finally => 무조건 실행
    /*
     *   DispatcherServlet 
