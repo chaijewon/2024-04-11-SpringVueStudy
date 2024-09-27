@@ -33,4 +33,28 @@ public class RecipeDAO {
   {
 	  return mapper.recipeHitTop8();
   }
+  
+  // 목록 
+  /*
+   *   @Select("SELECT no,poster,title,chef,hit,num "
+		 +"FROM (SELECT no,poster,title,chef,hit,rownum as num "
+		 +"FROM (SELECT + INDEX_ASC(recipe recipe_no_pk)no,poster,title,chef,hit "
+		 +"FROM recipe WHERE no IN(SELECT no FROM recipe "
+		 +"INTERSECT SELECT no FROM recipedetail))) "
+		 +"WHERE num BETWEEN #{start} AND #{end}")
+	   public List<RecipeVO> recipeListData(Map map);
+	   
+	   @Select("SELECT CEIL(COUNT(*)/12.0) FROM recipe "
+			  +"WHERE no IN(SELECT no FROM recipe "
+			  +"INTERSECT SELECT no FROM recipedetail)")
+	   public int recipeTotalPage();
+   */
+  public List<RecipeVO> recipeListData(Map map)
+  {
+	  return mapper.recipeListData(map);
+  }
+  public int recipeTotalPage()
+  {
+	  return mapper.recipeTotalPage();
+  }
 }
