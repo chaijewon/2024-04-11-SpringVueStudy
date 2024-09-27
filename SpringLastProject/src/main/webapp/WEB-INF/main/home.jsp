@@ -217,7 +217,7 @@
                             <!-- Single Popular Post -->
                             <c:forEach var="vo" items="${fList }">
                             <div class="single-populer-post d-flex">
-                                <img src="http://www.menupan.com${vo.poster }" alt="">
+                                <img src="http://www.menupan.com${vo.poster }" style="width: 200px;height: 120px">
                                 <div class="post-content">
                                     <a href="#">
                                         <h6>${vo.name }</h6>
@@ -254,7 +254,7 @@
                
                                     <input type="text" name="newsletter-email" id="nd" placeholder="검색어 입력">
                                     <button type=button><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                               
+                                    
                             </div>
                         </div>
                     </div>

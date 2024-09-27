@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=72fa81817487692b6dc093004af97650&libraries=services"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 </head>
 <body>
   <!-- ****** Breadcumb Area Start ****** -->
-    <div class="breadcumb-area" style="background-image: url(../../../img/bg-../../../img/breadcumb.jpg);">
+    <div class="breadcumb-area" style="background-image: url(../img/bg-img/breadcumb.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
@@ -42,44 +45,106 @@
                               
                                 <div class="related-post-slider owl-carousel">
                                     <!-- Single Related Post-->
-                                    <div class="single-post">
-                                        <!-- Post Thumb -->
-                                        <div class="post-thumb">
-                                            <img src="../img/blog-img/15.jpg" alt="">
-                                        </div>
-                                        
-                                    </div>
-                                    <!-- Single Related Post-->
-                                    <div class="single-post">
-                                        <!-- Post Thumb -->
-                                        <div class="post-thumb">
-                                            <img src="../img/blog-img/5.jpg" alt="">
-                                        </div>
-                                        
-                                    </div>
-                                    <!-- Single Related Post-->
-                                    <div class="single-post">
-                                        <!-- Post Thumb -->
-                                        <div class="post-thumb">
-                                            <img src="../img/blog-img/16.jpg" alt="">
-                                        </div>
-                                        
-                                    </div>
-                                    <!-- Single Related Post-->
-                                    <div class="single-post">
-                                        <!-- Post Thumb -->
-                                        <div class="post-thumb">
-                                            <img src="../img/blog-img/5.jpg" alt="">
-                                        </div>
-                                        
-                                    </div>
+                                    <c:forTokens items="${vo.images }" delims="^" var="img">
+	                                    <div class="single-post">
+	                                        <!-- Post Thumb -->
+	                                        <div class="post-thumb">
+	                                            <img src="http://www.menupan.com${img }" alt="">
+	                                        </div>
+	                                    </div>
+                                    </c:forTokens>
                                 </div>
                             </div>
                             <table class="table">
                               <tr>
-                                <td>Hello</td>
+                                <td width="30%" class="text-center" rowspan="6">
+                                  <img src="http://www.menupan.com${vo.poster }" style="width: 100%">
+                                </td>
+                                <td colspan="2">
+                                  <h3>${vo.name }&nbsp;<span style="color:orange;">${vo.score }</span></h3>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td width=15% class="text-center">주소</td>
+                                <td width="55%">${vo.address }</td>
+                              </tr>
+                              <tr>
+                                <td width=15% class="text-center">전화</td>
+                                <td width="55%">${vo.phone }</td>
+                              </tr>
+                              <tr>
+                                <td width=15% class="text-center">음식종류</td>
+                                <td width="55%">${vo.type }</td>
+                              </tr>
+                              <tr>
+                                <td width=15% class="text-center">주차</td>
+                                <td width="55%">${co.parking }</td>
+                              </tr>
+                              <tr>
+                                <td width=15% class="text-center">영업시간</td>
+                                <td width="55%">${vo.time }</td>
+                              </tr>
+                 
+                            </table>
+                            <table class="table">
+                              <tr>
+                                <td>${vo.theme }</td>
+                              </tr>
+                              <tr>
+                                <td>${vo.content }</td>
+                              </tr>
+                              <tr>
+                                <td class="text-right">
+                                  <a href="#" class="btn btn-xs btn-danger">좋아요</a>
+                                  <a href="#" class="btn btn-xs btn-success">찜하기</a>
+                                  <a href="#" class="btn btn-xs btn-info">예약</a>
+                                  <a href="../food/list.do" class="btn btn-xs btn-warning">목록</a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                 <div id="map" style="width:100%;height:350px;"></div>
+                                </td>
                               </tr>
                             </table>
+                            <script>
+                            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                   		    mapOption = {
+                   		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                   		        level: 3 // 지도의 확대 레벨
+                   		    };  
+
+                   		// 지도를 생성합니다    
+                   		var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+                   		// 주소-좌표 변환 객체를 생성합니다
+                   		var geocoder = new kakao.maps.services.Geocoder();
+
+                   		// 주소로 좌표를 검색합니다
+                   		geocoder.addressSearch('${vo.address}', function(result, status) {
+
+                   		    // 정상적으로 검색이 완료됐으면 
+                   		     if (status === kakao.maps.services.Status.OK) {
+
+                   		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                   		        // 결과값으로 받은 위치를 마커로 표시합니다
+                   		        var marker = new kakao.maps.Marker({
+                   		            map: map,
+                   		            position: coords
+                   		        });
+
+                   		        // 인포윈도우로 장소에 대한 설명을 표시합니다
+                   		        var infowindow = new kakao.maps.InfoWindow({
+                   		            content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.name}</div>'
+                   		        });
+                   		        infowindow.open(map, marker);
+
+                   		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                   		        map.setCenter(coords);
+                   		    } 
+                   		    });    
+                            </script>
                             <!-- Comment Area Start -->
                             <div class="comment_area section_padding_50 clearfix">
                                 <h4 class="mb-30">2 Comments</h4>

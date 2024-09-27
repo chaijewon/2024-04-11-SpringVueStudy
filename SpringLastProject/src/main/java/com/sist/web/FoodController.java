@@ -3,13 +3,20 @@ package com.sist.web;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sist.vo.FoodVO;
+import com.sist.service.*;
+import java.util.*;
 @Controller
 public class FoodController {
+   @Autowired
+   private FoodService fService; // 데이터베이스 연동
+   
    @GetMapping("food/list.do")
    public String food_list()
    {
@@ -32,8 +39,13 @@ public class FoodController {
    @GetMapping("food/detail.do")
    public String food_detail(int fno,Model model)
    {
-	   
-	   model.addAttribute("fno", fno);
+	   FoodVO vo=fService.foodDetailData(fno);
+	   model.addAttribute("vo", vo);
 	   return "food/detail";
+   }
+   @GetMapping("food/find.do")
+   public String food_find()
+   {
+	   return "food/find";
    }
 }

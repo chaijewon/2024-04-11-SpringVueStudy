@@ -25,24 +25,27 @@
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
                             <div class="login">
-                                <a href="register.html">Sing in</a>
+                                 ID&nbsp;<input type="text" size=10>
+                                 Password&nbsp;<input type="password" size=10>
+                                 <input type=button value="로그인" class="btn-sm btn-danger">
                             </div>
                             <div class="register">
                                 <a href="register.html">Sing up</a>
                             </div>
                         </div>
-                        <!-- Search Button Area -->
-                        <div class="search_button">
+                        
+                        <!-- <div class="search_button">
                             <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
                         </div>
-                        <!-- Search Form -->
+                       
                         <div class="search-hidden-form">
                             <form action="#" method="get">
-                                <input type="search" name="search" id="search-anything" placeholder="Search Anything...">
+                                <input type="text" name="search" placeholder="아이디 입력">
+                                <input type="password" name="search" placeholder="비밀번호 입력">
                                 <input type="submit" value="" class="d-none">
                                 <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
                             </form>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -57,7 +60,7 @@
                 <!-- Logo Area Start -->
                 <div class="col-12">
                     <div class="logo_area text-center">
-                        <a href="../main/main.do" class="yummy-logo">Food & Recipe & Goods</a>
+                        <a href="../main/main.do" class="yummy-logo">Food & Recipe & Travel</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +87,7 @@
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">맛집</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
                                         <a class="dropdown-item" href="../food/list.do">맛집목록</a>
-                                        <a class="dropdown-item" href="archive.html">맛집검색</a>
+                                        <a class="dropdown-item" href="../food/find.do">맛집검색</a>
                                         <a class="dropdown-item" href="single.html">맛집예약</a>
                                         <a class="dropdown-item" href="static.html">맛집추천</a>
                                     </div>
