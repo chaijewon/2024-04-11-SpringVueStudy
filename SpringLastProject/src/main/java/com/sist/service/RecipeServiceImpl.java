@@ -42,6 +42,12 @@ public class RecipeServiceImpl implements RecipeService{
 		// TODO Auto-generated method stub
 		return rDao.recipeTotalPage();
 	}
+
+	@Override
+	public RecipeDetailVO recipeDetailData(int no) {
+		// TODO Auto-generated method stub
+		return rDao.recipeDetailData(no);
+	}
    
    
 }

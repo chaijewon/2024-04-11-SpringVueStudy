@@ -1,6 +1,7 @@
 package com.sist.dao;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.*;
@@ -56,5 +57,22 @@ public class RecipeDAO {
   public int recipeTotalPage()
   {
 	  return mapper.recipeTotalPage();
+  }
+  
+  // 상세보기 
+  /*
+   *    @Update("UPDATE recipe SET "
+		  +"hit=hit+1 "
+		  +"WHERE no=#{no}")
+	   public void hitIncrement(int no);
+	   
+	   @Select("SELECT * FROM recipedetail "
+			  +"WHERE no=#{no}")
+	   public RecipeDetailVO recipeDetailData(int no);
+   */
+  public RecipeDetailVO recipeDetailData(int no)
+  {
+	  mapper.hitIncrement(no);
+	  return mapper.recipeDetailData(no);
   }
 }
