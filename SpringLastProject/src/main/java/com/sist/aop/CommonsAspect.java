@@ -46,7 +46,7 @@ public class CommonsAspect {
 				   String fno=cookies[i].getValue();
 				   FoodVO vo=fService.foodInfoData(Integer.parseInt(fno));
 				   list.add(vo);
-				   
+				   // footer에 전송
 			   }
 		   }
 	   }
