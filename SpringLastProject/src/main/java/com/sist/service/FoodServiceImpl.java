@@ -64,6 +64,12 @@ public class FoodServiceImpl implements FoodService{
 		// TODO Auto-generated method stub
 		return fDao.foodFindTotalPage(map);
 	}
+
+	@Override
+	public List<FoodVO> foodTypeListData(String type) {
+		// TODO Auto-generated method stub
+		return fDao.foodTypeListData(type);
+	}
   
   
 }

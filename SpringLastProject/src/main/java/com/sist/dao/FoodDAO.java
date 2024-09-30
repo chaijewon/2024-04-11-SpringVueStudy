@@ -85,4 +85,15 @@ public class FoodDAO {
   {
 	  return mapper.foodFindTotalPage(map);
   }
+  /*
+   *   예약 관련 
+   *   @Select("SELECT fno,name,poster "
+		 +"FROM project_food_house "
+		 +"WHERE type LIKE '%'||#{type}||'%'")
+       public List<FoodVO> foodTypeListData(String type);
+   */
+  public List<FoodVO> foodTypeListData(String type)
+  {
+	  return mapper.foodTypeListData(type);
+  }
 }
