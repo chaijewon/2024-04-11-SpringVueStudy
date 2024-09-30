@@ -26,6 +26,7 @@
       <!-- 페이지 출력 : component : page-card -->
      </div>
    </div>
+   
    <script>
    // .js => 재사용 목적 => 다이얼로그 => 
    const image_card={
