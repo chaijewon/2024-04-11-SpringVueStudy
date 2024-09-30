@@ -189,6 +189,7 @@ p{
     				console.log(error.response)
     			})
     		},
+    		
     		foodSelect(index){
     			this.isDay=true
     			this.food_detail=this.food_list[index]
