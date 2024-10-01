@@ -79,7 +79,7 @@
                 @click="updateForm(rvo.rno)" :id="'up'+rvo.no"
                >&nbsp;
                <input type=button class="btn btn-xs btn-info" value="삭제"
-                @click="replyDelete(rvo.rno)"
+                @click="replyDelete(rvo.rno)" 
                >
               </span>
              </td>
@@ -91,7 +91,7 @@
            </tr>
            <tr class="updates" style="display: none" :id="'u'+rvo.rno">
             <td colspan="2">
-              <textarea rows="3" cols="80" style="float: left" ref="msg">{{rvo.msg}}</textarea>
+              <textarea rows="3" cols="80" style="float: left" :id="'msg'+rvo.rno" >{{rvo.msg}}</textarea>
               <input type="button" value="댓글수정" style="float: left;width:80px;height: 67px;background-color: green"
                @click="replyUpdate(rvo.rno)"
               >
@@ -153,18 +153,45 @@
     	},
     	// 댓글 처리 => INSERT / SELECT / UPDATE / DELETE
     	methods:{
+    		replyUpdate(rno){
+    			let msg=$('#msg'+rno).val()
+    			if(msg==="")
+    			{
+    				$('#msg'+rno).focus()
+    				return
+    			}
+    			
+    			axios.post('../food/reply_update_vue.do',null,{
+    				params:{
+    					rno:rno,
+    					fno:this.fno,
+    					msg:msg
+    				}
+    			}).then(response=>{
+        			console.log(response.data)
+        			this.reply_list=response.data
+        			$('#u'+rno).hide()
+    				$('#up'+rno).val("수정")
+        		}).catch(error=>{
+        			console.log(error.response)
+        		})	
+    		},
     		updateForm(rno)
     		{
-    			alert("rno:"+rno)
+    			
     			$('.updates').hide()
     			$('.ups').val('수정')
     			if(this.isUps===false)
     		    {
-    				
+    				this.isUps=true
+    				$('#u'+rno).show()
+    				$('#up'+rno).val("취소")
     		    }
     			else
     			{
-    				
+    				this.isUps=false
+    				$('#u'+rno).hide()
+    				$('#up'+rno).val("수정")
     			}
     		},
     		replyInsert(){

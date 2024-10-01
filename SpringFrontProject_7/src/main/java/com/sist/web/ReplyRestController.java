@@ -49,4 +49,10 @@ public class ReplyRestController {
     	rDao.replyDelete(rno);
     	return commonsListData(fno);
     }
+    @PostMapping(value="food/reply_update_vue.do",produces = "text/plain;charset=UTF-8")
+    public String reply_update(ReplyVO vo)throws Exception
+    {
+    	rDao.replyUpdate(vo);
+    	return commonsListData(vo.getFno());
+    }
 }

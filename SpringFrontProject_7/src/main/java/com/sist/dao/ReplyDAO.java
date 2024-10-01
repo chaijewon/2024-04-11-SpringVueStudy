@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -45,5 +46,15 @@ public class ReplyDAO {
    public void replyDelete(int rno)
    {
 	   mapper.replyDelete(rno);
+   }
+   /*
+    *    @Update("UPDATE spring_reply SET "
+		 +"msg=#{msg} "
+		 +"WHERE rno=#{rno}")
+        public void replyUpdate(ReplyVO vo);
+    */
+   public void replyUpdate(ReplyVO vo)
+   {
+	   mapper.replyUpdate(vo);
    }
 }
