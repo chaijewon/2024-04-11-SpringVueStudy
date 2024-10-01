@@ -50,7 +50,7 @@
                         <!-- Post Thumb -->
                         <div class="post-thumb">
                            <a :href="'../food/detail_before.do?fno='+vo.fno">
-                            <img :src="'http://www.menupan.com'+vo.poster" style="width: 350px;height: 200px">
+                            <img :src="vo.poster" style="width: 350px;height: 200px">
                            </a>
                         </div>
                         <!-- Post Content -->
