@@ -5,11 +5,40 @@
 
    <!-- 
     보안 => xml
+                        | 403 접근거부 
+    사용자(요청) ==== FliterChain(보안 = 인증 ,인가) ==== DispatcherServlet
+                                                        | HandlerMapping
+                                                        | Model클래스 찾기 
+                                                     ViewResolver
+                                                        |
+                                                      View 
+     1) 인증 : 사용자의 신원 확인 => 접근 가능여부 
+     2) 권한 : 사용자 권한 부여 => ROLE_USER , ROLE_MANAGER , ROLE_ADMIN
+     3) 세션관리 : 보안 => 자동으로 세션에 저장이 된다 
+                  HttpSession => UserDetails 
+     4) 암호화,복호화 
+          PasswordEncoder => encode(). decode()
+     5) 로그인 처리 / 로그아웃 처리 / 자동 로그인 
+        <form-login class="" method="">
+        <form-logout class="" method="">
+        <remember-me/>
+        oauth2 => SNS를 이용한 로그인 
+                  카카오 / 네이버 / ....
+        = 보안 프로그램에서 처리 
+     = 장점 : 겅력한 보안 기능 (자동로그인 , 카카오로그인) => 재사용 
+     = 단점 : 설정이 복잡하다 (JWT : JSON)
+                         ===== Spring-Boot (설정이 자동 처리) => 기본 설정이 되어 있다 
+                               Spring : XML 
+                               Spring-Boot : properties / yml (파이썬) 
+                               
+     사용자 ==== DelegatingFilterProxy => FilterChain => DispatcherServlet
+                                      | 권한 여부 => 403
    -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 		 /WEB-INF/security/application-datasource.xml
+		 /WEB-INF/security/application-security.xml
 		</param-value>
 	</context-param>
 	<listener>
@@ -61,5 +90,14 @@
       <filter-name>encodingFilter</filter-name>
       <url-pattern>/*</url-pattern>
     </filter-mapping>
-
+    <!-- 보안 적용 -->
+    <!-- 
+    <filter>
+      <filter-name>springSecurityFilterChain</filter-name>
+      <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+      <filter-name>springSecurityFilterChain</filter-name>
+      <url-pattern>/*</url-pattern>
+    </filter-mapping> -->
 </web-app>

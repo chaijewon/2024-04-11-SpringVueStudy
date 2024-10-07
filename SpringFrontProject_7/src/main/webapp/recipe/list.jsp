@@ -1,22 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%--
-     자바 : 변수 (데이터형) , 연산자 , 제어문 , 배열 
-          객체지향프로그램 
-            | 캡슐화 , 다형성(오버라이딩) 
-            | 클래스 / 객체 
-            | 인터페이스 / 추상 클래스 
-            | 라이브러리 => java.lang / java.util / java.io
-     오라클 : DML(INSERT,UPDATE,DELETE) / DQL (SELECT)
-                                         | JOIN / SUBQUERY 
-     JSP : 지시자 (taglib, page) , 내장 객체 (request,response,session)
-           cookie , EL , JSTL , MVC
-     Spring : DI / AOP / MVC / ORM (MyBatis)
-     ============================================ Back-End 
-     Front : Jquery(Ajax) , HTML , CSS 
-             Vue / React / Redux / React-Query => 우대 
-     
- --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +30,7 @@ p{
 </head>
 <body>
   <div class="container">
-    <h1 class="text-center">맛집 목록</h1>
+    <h1 class="text-center">레시피 목록</h1>
     <div class="row">
       <image-card></image-card>
     </div>
@@ -104,7 +87,7 @@ p{
     		},
     		// 공통으로 사용하는 함수 
     		dataRecv(){
-    			axios.get('../food/list_vue.do',{
+    			axios.get('../recipe/list_vue.do',{
     				params:{
     					page:this.curpage
     				}
@@ -115,7 +98,7 @@ p{
     				this.totalpage=response.data.totalpage
     				this.startPage=response.data.startPage
     				this.endPage=response.data.endPage
-    				this.url='../food/detail.do'
+    				
     				/*
     				     response={config:{},data:{curpage:1,totalpage:100,list:[{},{}...]}}
     				     Vue/React => 값이 변경이 되면 자동으로 HTML을 변경한다

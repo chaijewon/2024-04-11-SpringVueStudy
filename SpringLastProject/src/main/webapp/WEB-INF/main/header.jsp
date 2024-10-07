@@ -25,12 +25,10 @@
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
                             <div class="login">
-                                 ID&nbsp;<input type="text" size=10>
-                                 Password&nbsp;<input type="password" size=10>
-                                 <input type=button value="로그인" class="btn-sm btn-danger">
+                                <a href="../member/login.do">로그인</a>
                             </div>
                             <div class="register">
-                                <a href="register.html">Sing up</a>
+                                <a href="../member/join.do">회원가입</a>
                             </div>
                         </div>
                         

@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:oauth2="http://www.springframework.org/schema/security/oauth2"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/security/oauth2 https://www.springframework.org/schema/security/spring-security-oauth2.xsd
-		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.1.xsd">
-</beans>
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+    <context:component-scan base-package="com.sist.*"/>
+    <!--  접근 권한 설정  -->
+    <!--  로그인 처리  -->
+    <!-- 데이터베이스 연결 -->
+    <!-- security 5 : 반드시 비밀번호 암호화를 해야 된다 -->
+    <beans:bean id="bcryptEncoder"
+       class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+</beans:beans>
