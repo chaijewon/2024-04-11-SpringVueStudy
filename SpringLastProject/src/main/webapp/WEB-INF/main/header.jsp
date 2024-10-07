@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,12 +26,24 @@
                 <div class="col-7 col-sm-6">
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
+                          <c:if test="${sessionScope.userId==null }">
                             <div class="login">
                                 <a href="../member/login.do">로그인</a>
                             </div>
                             <div class="register">
                                 <a href="../member/join.do">회원가입</a>
                             </div>
+                          </c:if>
+                          <c:if test="${sessionScope.userId!=null }">
+                            <div class="login">
+                                ${sessionScope.userName}(<sec:authorize access="hasRole('ROLE_ADMIN')">관리자</sec:authorize>
+                                  <sec:authorize access="hasRole('ROLE_USER')">일반사용자</sec:authorize>
+                                )
+                                님 로그인되었습니다&nbsp;&nbsp;
+                                <a href="../member/logout.do">로그아웃</a>
+                            </div>
+                            
+                          </c:if>
                         </div>
                         
                         <!-- <div class="search_button">
