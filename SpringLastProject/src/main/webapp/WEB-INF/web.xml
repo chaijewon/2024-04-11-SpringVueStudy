@@ -91,7 +91,7 @@
       <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!-- 보안 적용 -->
-    <!-- 
+    
     <filter>
       <filter-name>springSecurityFilterChain</filter-name>
       <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -99,5 +99,5 @@
     <filter-mapping>
       <filter-name>springSecurityFilterChain</filter-name>
       <url-pattern>/*</url-pattern>
-    </filter-mapping> -->
+    </filter-mapping>
 </web-app>

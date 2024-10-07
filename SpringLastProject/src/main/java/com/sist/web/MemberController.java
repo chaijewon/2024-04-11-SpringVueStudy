@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.service.MemberService;
 import com.sist.vo.MemberVO;
@@ -37,5 +38,10 @@ public class MemberController {
 	   //insert / insert
 	   
 	   return "redirect:../main/main.do";
+   }
+   @RequestMapping("member/login.do")
+   public String member_login()
+   {
+	   return "member/login";
    }
 }

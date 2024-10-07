@@ -40,4 +40,24 @@ public class MemberDAO {
    {
 	   mapper.memberAuthorityInsert(userId);
    }
+   /*
+    *   @Select("SELECT userId,userName,userPwd,enabled,authority "
+		 +"FROM spring_member sm , authority au "
+		 +"WHERE pm.userId=au.userId "
+		 +"AND pm.userId=#{userId}")
+  public MemberVO memberInfoData(String userId);
+  
+  @Select("SELECT userId,userName,userPwd,sex,email,phone,post,addr1,addr2 "
+			 +"FROM spring_member "
+			 +"WHERE userId=#{userId}")
+  public MemberVO memberSessionData(String userId);
+    */
+   public MemberVO memberInfoData(String userId)
+   {
+	   return mapper.memberInfoData(userId);
+   }
+   public MemberVO memberSessionData(String userId)
+   {
+	   return mapper.memberSessionData(userId);
+   }
 }

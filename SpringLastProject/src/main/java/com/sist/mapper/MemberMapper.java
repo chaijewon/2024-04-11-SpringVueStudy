@@ -33,5 +33,19 @@ public interface MemberMapper {
   // role_admin / role_user
   @Insert("INSERT INTO authority VALUES(#{userId},'ROLE_USER')")
   public void memberAuthorityInsert(String userId);
+  
+  // 로그인 처리 
+  // ID여부 확인 => idCheck
+  // 비밀번호 검사 
+  @Select("SELECT userId,userName,userPwd,enabled,authority "
+		 +"FROM spring_member sm , authority au "
+		 +"WHERE pm.userId=au.userId "
+		 +"AND pm.userId=#{userId}")
+  public MemberVO memberInfoData(String userId);
+  
+  @Select("SELECT userId,userName,userPwd,sex,email,phone,post,addr1,addr2 "
+			 +"FROM spring_member "
+			 +"WHERE userId=#{userId}")
+  public MemberVO memberSessionData(String userId);
 }
 
