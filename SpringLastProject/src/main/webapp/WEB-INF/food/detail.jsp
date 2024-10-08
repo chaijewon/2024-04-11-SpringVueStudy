@@ -8,6 +8,11 @@
 <title>Insert title here</title>
 <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=72fa81817487692b6dc093004af97650&libraries=services"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<style type="text/css">
+.nav-link{
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
   <!-- ****** Breadcumb Area Start ****** -->
@@ -165,13 +170,25 @@
                                                 <span class="comment-date text-muted">{{vo.dbday}}</span>
                                                 <h5>{{vo.name}}</h5>
                                                 <p>{{vo.msg}}</p>
-                                                <a href="#" v-if="sessionId===vo.id">Update</a>
-                                                <a href="#" v-if="sessionId===vo.id">Delete</a>
-                                                <a class="active" href="#" v-if="sessionId!=''">Reply</a>
-                                                <a href="#" v-if="sessionId!==vo.id && sessionId!==''">Like</a>
-                                                
+                                                <button v-if="sessionId===vo.id" class="btn-xs btn-danger" style="margin-left: 2px">Update</button>
+                                                <button v-if="sessionId===vo.id" class="btn-xs btn-info" style="margin-left: 2px">Delete</button>
+                                                <button class="active insert" v-if="sessionId!=''" style="margin-left: 2px"  @click="replyForm(vo.cno)" :id="'i'+vo.cno">Reply</button>
+                                                <button v-if="sessionId!==vo.id && sessionId!==''" style="margin-left: 2px">Like</button>
+                                                <table class="table ins" style="display: none" :id="'in'+vo.cno">
+			                                     <tr>
+			                                      <td>
+			                                       <textarea rows="4" cols="60" style="float: left" ref="msg" v-model="msg"></textarea>
+			                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
+			                                         @click="replyReplyInsert(vo.cno)"
+			                                       >
+			                                       </td>
+			                                    </tr>
+			                                   </table>
+			                               
                                             </div>
+                                 
                                         </div>
+                                        
                                         <ol class="children" v-if="vo.group_tab===1">
                                             <li class="single_comment_area">
                                                 <div class="comment-wrapper d-flex">
@@ -235,13 +252,31 @@
                 startPage:0,
                 type:1,
                 sessionId:'${sessionId}',
-                msg:''
+                msg:'',
+                isReply:false
     		 }
     	 },
     	 mounted(){
     		 this.dataRecv()
     	 },
     	 methods:{
+    		 replyForm(cno){
+    			$('.ins').hide()
+    			$('.insert').text('Reply')
+    			if(this.isReply===false)
+    			{
+    				this.isReply=true
+    			    $('#in'+cno).show()
+    			    $('#i'+cno).text("Cancel")
+    			    
+    			} 
+    			else
+    			{
+    				this.isReply=false
+    				$('#in'+cno).hide()
+    			    $('#i'+cno).text("Reply")
+    			}
+    		 },
     		 replyInsert(){
     			if(this.msg==="")
     			{
