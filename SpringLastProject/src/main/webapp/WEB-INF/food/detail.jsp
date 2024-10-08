@@ -168,7 +168,7 @@
                                                 <a href="#" v-if="sessionId===vo.id">Update</a>
                                                 <a href="#" v-if="sessionId===vo.id">Delete</a>
                                                 <a class="active" href="#" v-if="sessionId!=''">Reply</a>
-                                                <a href="#" v-if="sessionId!=''">Like</a>
+                                                <a href="#" v-if="sessionId!==vo.id">Like</a>
                                                 
                                             </div>
                                         </div>
@@ -187,7 +187,7 @@
                                                         <a href="#" v-if="sessionId===vo.id">Update</a>
                                                         <a href="#" v-if="sessionId===vo.id">Delete</a>
                                
-                                                        <a href="#" v-if="sessionId!=''">Like</a>
+                                                        <a href="#" v-if="sessionId!==vo.id">Like</a>
                                                         
                                                     </div>
                                                 </div>
@@ -197,7 +197,7 @@
                                     
                                 </ol>
                             </div>
-
+                            <!--  페이지  -->
                             <!-- Leave A Comment -->
                             <c:if test="${sessionScope.userId!=null }">
 	                            <div class="leave-comment-area section_padding_50 clearfix">
