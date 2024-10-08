@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -102,4 +103,15 @@ public class CommentDAO {
   {
 	  return mapper.commentTotalPage(map);
   }
+  /*
+   *   @Insert("INSERT INTO spring_comment(cno,rno,id,name,sex,msg,group_id,type) "
+		 +"VALUES(sc_cno_seq.nextval,#{rno},#{id},#{name},#{sex},#{msg},"
+		 +"(SELECT NVL(MAX(group_id)+1,1) FROM spring_comment),#{type})")
+       public void replyInsert(CommentVO vo);
+   */
+  public void commentInsert(CommentVO vo)
+  {
+	  mapper.commentInsert(vo);
+  }
+  
 }

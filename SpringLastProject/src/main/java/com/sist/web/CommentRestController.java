@@ -3,8 +3,12 @@ package com.sist.web;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
+
+import javax.servlet.http.HttpSession;
+
 import com.sist.vo.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.service.*;
@@ -52,5 +56,20 @@ public class CommentRestController {
    public String comment_list(int page, int rno, int type) throws Exception
    {
 	   return commonsListData(page, rno, type);
+   }
+   
+   @PostMapping(value="comment/insert_vue.do",produces = "text/plain;charset=UTF-8")
+   public String comment_insert(CommentVO vo,HttpSession session) throws Exception
+   {
+	  String id=(String)session.getAttribute("userId");
+	  String name=(String)session.getAttribute("userName");
+	  String sex=(String)session.getAttribute("sex");
+	  vo.setId(id);
+	  vo.setName(name);
+	  vo.setSex(sex);
+	  cService.commentInsert(vo);
+	  // INSERT INTO spring_comment(cno,rno,id,name,sex,msg,group_id,type)
+	  //id,name => 저장 
+	  return commonsListData(1, vo.getRno(), vo.getType());
    }
 }

@@ -168,7 +168,7 @@
                                                 <a href="#" v-if="sessionId===vo.id">Update</a>
                                                 <a href="#" v-if="sessionId===vo.id">Delete</a>
                                                 <a class="active" href="#" v-if="sessionId!=''">Reply</a>
-                                                <a href="#" v-if="sessionId!==vo.id">Like</a>
+                                                <a href="#" v-if="sessionId!==vo.id && sessionId!==''">Like</a>
                                                 
                                             </div>
                                         </div>
@@ -187,7 +187,7 @@
                                                         <a href="#" v-if="sessionId===vo.id">Update</a>
                                                         <a href="#" v-if="sessionId===vo.id">Delete</a>
                                
-                                                        <a href="#" v-if="sessionId!==vo.id">Like</a>
+                                                        <a href="#" v-if="sessionId!==vo.id && sessionId!==''">Like</a>
                                                         
                                                     </div>
                                                 </div>
@@ -206,7 +206,9 @@
 	                                    <tr>
 	                                      <td>
 	                                       <textarea rows="4" cols="70" style="float: left" ref="msg" v-model="msg"></textarea>
-	                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px">
+	                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
+	                                         @click="replyInsert()"
+	                                       >
 	                                       
 	                                      </td>
 	                                    </tr>
@@ -232,13 +234,38 @@
                 endPage:0,
                 startPage:0,
                 type:1,
-                sessionId:'${sessionId}'
+                sessionId:'${sessionId}',
+                msg:''
     		 }
     	 },
     	 mounted(){
     		 this.dataRecv()
     	 },
     	 methods:{
+    		 replyInsert(){
+    			if(this.msg==="")
+    			{
+    				this.$refs.msg.focus()
+    				return
+    			}
+    			axios.post('../comment/insert_vue.do',null,{
+    				params:{
+    					rno:this.rno,
+    					type:this.type,
+    					msg:this.msg
+    				}
+    			}).then(response=>{
+	   				 console.log(response.data)
+					 this.reply_list=response.data.list
+					 this.curpage=response.data.curpage
+					 this.totalpage=response.data.totalpage
+					 this.startPage=response.data.startPage
+					 this.endPage=response.data.endPage
+					 this.msg=''
+			   }).catch(error=>{
+				     console.log(error.response)
+			   })
+    		 },
     		 dataRecv(){
     			 axios.get('../comment/list_vue.do',{
     				 params:{
