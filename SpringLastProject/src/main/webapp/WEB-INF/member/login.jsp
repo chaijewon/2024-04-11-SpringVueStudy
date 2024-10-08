@@ -29,18 +29,18 @@
         </div>
     </div>
     <section class="single_blog_area section_padding_80" id="loginApp">
-        <div class="container" style="width: 450px">
-            <div class="row">
+        <div class="container">
+            <div class="row justify-content-center">
              <form action="../member/login.do" method="post" id="frm">
               <table class="table text-center">
                <tr>
-                 <th class="text-center" width=20%>아이디</th>
+                 <th class="text-center" width=20%>ID</th>
                  <td width="80%">
                    <input type=text name="userId" ref="userId" v-model="userId">
                  </td>
                </tr>
                <tr>
-                 <th class="text-center" width=20%>비밀번호</th>
+                 <th class="text-center" width=20%>PW</th>
                  <td width="80%">
                    <input type=password name="userPwd" ref="userPwd" v-model="userPwd">
                  </td>
