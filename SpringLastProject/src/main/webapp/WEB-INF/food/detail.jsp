@@ -177,7 +177,7 @@
                                                 <table class="table ins" style="display: none" :id="'in'+vo.cno">
 			                                     <tr>
 			                                      <td>
-			                                       <textarea rows="4" cols="60" style="float: left" ref="msg" v-model="msg"></textarea>
+			                                       <textarea rows="4" cols="60" style="float: left" :id="'msg'+vo.cno" ></textarea>
 			                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
 			                                         @click="replyReplyInsert(vo.cno)"
 			                                       >
@@ -260,6 +260,35 @@
     		 this.dataRecv()
     	 },
     	 methods:{
+    		 replyReplyInsert(cno){
+    			 let msg=$('#msg'+cno).val()
+    			 if(msg.trim()==="")
+    			 {
+    				 $('#msg'+cno).focus()
+    				 return
+    			 }
+    			 
+    			 axios.post('../comment/reply_insert_vue.do',null,{
+     				params:{
+     					rno:this.rno,
+     					type:this.type,
+     					msg:msg,
+     					cno:cno
+     				}
+     			}).then(response=>{
+ 	   				 console.log(response.data)
+ 					 this.reply_list=response.data.list
+ 					 this.curpage=response.data.curpage
+ 					 this.totalpage=response.data.totalpage
+ 					 this.startPage=response.data.startPage
+ 					 this.endPage=response.data.endPage
+ 					 $('#msg'+cno).val('')
+ 					 $('#in'+cno).hide()
+ 					 $('#i'+cno).text("Reply")
+ 			   }).catch(error=>{
+ 				     console.log(error.response)
+ 			   })
+    		 },
     		 replyForm(cno){
     			$('.ins').hide()
     			$('.insert').text('Reply')

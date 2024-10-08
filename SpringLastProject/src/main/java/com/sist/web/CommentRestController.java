@@ -72,4 +72,17 @@ public class CommentRestController {
 	  //id,name => 저장 
 	  return commonsListData(1, vo.getRno(), vo.getType());
    }
+   @PostMapping(value="comment/reply_insert_vue.do",produces = "text/plain;charset=UTF-8")
+   public String comment_reply_insert(int cno,CommentVO vo,HttpSession session)
+   throws Exception
+   {
+	   String id=(String)session.getAttribute("userId");
+	   String name=(String)session.getAttribute("userName");
+	   String sex=(String)session.getAttribute("sex");
+	   vo.setId(id);
+	   vo.setName(name);
+	   vo.setSex(sex);
+	   cService.commentReplyReplyInsert(cno, vo);
+	   return commonsListData(1, vo.getRno(), vo.getType());
+   }
 }

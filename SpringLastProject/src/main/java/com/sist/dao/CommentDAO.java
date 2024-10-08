@@ -2,8 +2,12 @@ package com.sist.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 /*
  *   스프링에서 메모리 할당 ==> @Autowried 
  *           =========
@@ -113,5 +117,41 @@ public class CommentDAO {
   {
 	  mapper.commentInsert(vo);
   }
-  
+  /*
+   *   @Select("SELECT group_id,group_step,group_tab "
+		 +"FROM spring_comment "
+		 +"WHERE cno=#{cno}")
+	  public CommentVO commentParentInfoData(int cno);
+	  
+	  @Update("UPDATE spring_comment SET "
+			 +"group_step=group_step+1 "
+			 +"WHERE group_id=#{group_id} AND group_step>#{group_step}")
+	  public void commentGroupStepIncrement(CommentVO vo);
+	  //cno,rno,id,name,sex,msg,group_id,type
+	  @Insert("INSERT INTO spring_comment(cno,rno,id,name,sex,msg,group_id,"
+			 +"group_step,group_tab,root,type) "
+		     +"VALUES(sc_cno_seq.nextval,#{rno},#{id},#{name},#{sex},"
+			 +"#{msg},#{group_id},#{group_step},#{group_tab},#{root},#{type})"
+			 )
+	  public void commentReplyReplyInsert(CommentVO vo);
+	  
+	  @Update("UPDATE spring_comment SET "
+			 +"depth=depth+1 "
+			 +"WHERE cno=#{cno}")
+	  public void commentDepthIncrement(int cno);
+   */
+  // 일괄처리 
+  @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+  public void commentReplyReplyInsert(int cno,CommentVO vo)
+  {
+	  CommentVO pvo=mapper.commentParentInfoData(cno);
+	  vo.setGroup_id(pvo.getGroup_id());
+	  vo.setGroup_step(pvo.getGroup_step()+1);
+	  vo.setGroup_tab(pvo.getGroup_tab()+1);
+	  
+	  mapper.commentGroupStepIncrement(pvo);
+	  mapper.commentReplyReplyInsert(vo);
+	  mapper.commentDepthIncrement(cno);
+	  
+  }
 }

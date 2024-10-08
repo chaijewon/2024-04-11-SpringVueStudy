@@ -3,6 +3,7 @@ import java.util.*;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 public interface CommentMapper {
@@ -23,4 +24,34 @@ public interface CommentMapper {
 		 +"VALUES(sc_cno_seq.nextval,#{rno},#{id},#{name},#{sex},#{msg},"
 		 +"(SELECT NVL(MAX(group_id)+1,1) FROM spring_comment),#{type})")
   public void commentInsert(CommentVO vo);
+  /*
+   *    AAAAA 
+   *      =LLLLL
+   *      =BBBBB
+   *      =CCCCC
+   *      =DDDDD
+   *    KKKKK
+   */
+  // 대댓글 
+  @Select("SELECT group_id,group_step,group_tab "
+		 +"FROM spring_comment "
+		 +"WHERE cno=#{cno}")
+  public CommentVO commentParentInfoData(int cno);
+  
+  @Update("UPDATE spring_comment SET "
+		 +"group_step=group_step+1 "
+		 +"WHERE group_id=#{group_id} AND group_step>#{group_step}")
+  public void commentGroupStepIncrement(CommentVO vo);
+  //cno,rno,id,name,sex,msg,group_id,type
+  @Insert("INSERT INTO spring_comment(cno,rno,id,name,sex,msg,group_id,"
+		 +"group_step,group_tab,root,type) "
+	     +"VALUES(sc_cno_seq.nextval,#{rno},#{id},#{name},#{sex},"
+		 +"#{msg},#{group_id},#{group_step},#{group_tab},#{root},#{type})"
+		 )
+  public void commentReplyReplyInsert(CommentVO vo);
+  
+  @Update("UPDATE spring_comment SET "
+		 +"depth=depth+1 "
+		 +"WHERE cno=#{cno}")
+  public void commentDepthIncrement(int cno);
 }
