@@ -171,7 +171,7 @@
                                                 <h5>{{vo.name}}</h5>
                                                 <p>{{vo.msg}}</p>
                                                 <button v-if="sessionId===vo.id" class="btn-xs btn-danger" style="margin-left: 2px">Update</button>
-                                                <button v-if="sessionId===vo.id" class="btn-xs btn-info" style="margin-left: 2px">Delete</button>
+                                                <button v-if="sessionId===vo.id" class="btn-xs btn-info" style="margin-left: 2px" @click="replyDelete(vo.cno)">Delete</button>
                                                 <button class="active insert" v-if="sessionId!=''" style="margin-left: 2px"  @click="replyForm(vo.cno)" :id="'i'+vo.cno">Reply</button>
                                                 <button v-if="sessionId!==vo.id && sessionId!==''" style="margin-left: 2px">Like</button>
                                                 <table class="table ins" style="display: none" :id="'in'+vo.cno">
@@ -260,6 +260,25 @@
     		 this.dataRecv()
     	 },
     	 methods:{
+    		 replyDelete(cno){
+    			axios.get('../comment/delete_vue.do',{
+    				params:{
+    					cno:cno,
+    					rno:this.rno,
+    					type:this.type
+    				}
+    			}).then(response=>{
+ 	   				 console.log(response.data)
+ 					 this.reply_list=response.data.list
+ 					 this.curpage=response.data.curpage
+ 					 this.totalpage=response.data.totalpage
+ 					 this.startPage=response.data.startPage
+ 					 this.endPage=response.data.endPage
+ 					 
+ 			   }).catch(error=>{
+ 				     console.log(error.response)
+ 			   }) 
+    		 },
     		 replyReplyInsert(cno){
     			 let msg=$('#msg'+cno).val()
     			 if(msg.trim()==="")
