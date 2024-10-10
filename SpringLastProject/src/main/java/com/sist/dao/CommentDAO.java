@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -115,6 +116,7 @@ public class CommentDAO {
    */
   public void commentInsert(CommentVO vo)
   {
+	  mapper.foodReplyIncrement(vo.getRno());
 	  mapper.commentInsert(vo);
   }
   /*
@@ -144,6 +146,7 @@ public class CommentDAO {
   @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
   public void commentReplyReplyInsert(int cno,CommentVO vo)
   {
+	  mapper.foodReplyIncrement(vo.getRno());
 	  CommentVO pvo=mapper.commentParentInfoData(cno);
 	  vo.setGroup_id(pvo.getGroup_id());
 	  vo.setGroup_step(pvo.getGroup_step()+1);
@@ -153,5 +156,65 @@ public class CommentDAO {
 	  mapper.commentReplyReplyInsert(vo);
 	  mapper.commentDepthIncrement(cno);
 	  
+  }
+  /*
+   *   MyBatis 
+   *   CRUD => INSERT / UPDATE / DELETE / SELECT => 1차
+   *   Spring = MyBatis 
+   *   CRUD / JOIN / 동적 쿼리 / Transaction
+   *                 =======   ===========
+   */
+  /*
+   *    @Select("SELECT group_id,group_step FROM spring_comment "
+		 +"WHERE cno=#{cno}")
+		  public CommentVO commentDeleteInfoData(int cno);
+		  
+		  @Delete("<script>"
+				 +"DELETE FROM spring_comment "
+				 +"WHERE "
+				 +"<if test=\"group_step==0\">"
+				 +"group_id=#{group_id}"
+				 +"</if> "
+				 +"<if test=\"group_step!=0\">"
+				 +"cno=#{cno} "
+				 +"</if>"
+				 +"</script>"
+				 )
+		  public void commentDelete(Map map);
+   */
+  public CommentVO commentDeleteInfoData(int cno)
+  {
+	  return mapper.commentDeleteInfoData(cno);
+  }
+  public void commentDelete(Map map)
+  {
+	   mapper.commentDelete(map);    
+  }
+  /*
+   *   @Update("UPDATE project_food_house SET "
+		 +"replycount=replycount+1 "
+		 +"WHERE fno=#{fno}")
+	  public void foodReplyIncrement(int fno);
+	  
+	  @Update("UPDATE project_food_house SET "
+			 +"replycount=replycount-1 "
+		     +"WHERE fno=#{fno}")
+	  public void foodReplyDecrement(int fno);
+   */
+  /*public void foodReplyIncrement(int fno)
+  {
+	  mapper.foodReplyIncrement(fno);
+  }
+  public void foodReplyDecrement(int fno)
+  {
+	  mapper.foodReplyDecrement(fno);
+  }*/
+  public void foodReplyDecrement(int fno)
+  {
+	  mapper.foodReplyDecrement(fno);
+  }
+  public void commentUpdate(CommentVO vo)
+  {
+	  mapper.commentUpdate(vo);
   }
 }
