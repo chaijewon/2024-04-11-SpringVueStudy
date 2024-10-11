@@ -75,4 +75,14 @@ public class RecipeDAO {
 	  mapper.hitIncrement(no);
 	  return mapper.recipeDetailData(no);
   }
+  /*
+   *   @Select("SELECT no,poster,title,rownum "
+		  +"FROM recipe "
+		  +"WHERE chef=#{chef} AND rownum<=20")
+   public List<RecipeVO> recipeMakeData(String chef);
+   */
+  public List<RecipeVO> recipeMakeData(String chef)
+  {
+	  return mapper.recipeMakeData(chef);
+  }
 }
