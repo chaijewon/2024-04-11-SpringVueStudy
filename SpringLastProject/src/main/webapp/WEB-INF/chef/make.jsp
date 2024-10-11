@@ -13,6 +13,10 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+<script type="text/javascript">
+// 버전 충돌 방지
+let $j371 = jQuery.noConflict();
+</script>
 </head>
 <body>
 <!-- ****** Breadcumb Area Start ****** -->
@@ -157,12 +161,12 @@
    			 }).then(response=>{
    				 console.log(response.data)
    				 this.recipe_list=response.data
-   				 alert("1")
-   				 $('#dialog').dialog({
+   				 
+   				 $j371('#dialog').dialog({
    					 autoOpen:false,
    					 modal:true,
-   					 width:700,
-   					 height:600
+   					 width:800,
+   					 height:700
    				 }).dialog("open")
    			 })/*.catch(error=>{
    				 console.log(error.response)
