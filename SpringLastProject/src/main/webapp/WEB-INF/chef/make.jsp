@@ -6,10 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.page-link:hover{
+.page-link:hover,.nav-link:hover{
    cursor: pointer;
 }
 </style>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
 </head>
 <body>
 <!-- ****** Breadcumb Area Start ****** -->
@@ -18,7 +21,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
-                        <h2>레시피 목록</h2>
+                        <h2>쉐프 목록</h2>
                     </div>
                 </div>
             </div>
@@ -45,6 +48,38 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                  <table class="table">
+                   <tr>
+                    <td>
+                     <table class="table" v-for="vo in chef_list">
+                      <tr>
+                       <td width="20%" class="text-center" rowspan="2">
+                        <img :src="vo.poster" style="width: 180px;height: 150px"
+                         class="nav-link" @click="detail(vo.chef)"
+                        >
+                       </td>
+                       <td colspan="4">
+                        <h3 style="color: orange;" class="nav-link" @click="detail(vo.chef)">{{vo.chef}}</h3>
+                       </td>
+                      </tr>
+                      <tr>
+                        <td class="text-center">
+                         <img src="../img/icon/m1.png">{{vo.mem_cont1}}
+                        </td>
+                        <td class="text-center">
+                         <img src="../img/icon/m2.png">{{vo.mem_cont3}}
+                        </td>
+                        <td class="text-center">
+                         <img src="../img/icon/m3.png">{{vo.mem_cont7}}
+                        </td>
+                        <td class="text-center">
+                         <img src="../img/icon/m4.png">{{vo.mem_cont2}}
+                        </td>
+                      </tr>
+                     </table>
+                    </td>
+                   </tr>
+                  </table>
                 </div>
                 <div class="col-12">
                     <div class="pagination-area d-sm-flex mt-15">
@@ -71,9 +106,29 @@
 
             </div>
         </div>
+        <div id="dialog" title="레시피" v-show="isShow">
+          <make_dialog v-bind:r_list="recipe_list"></make_dialog>
+        </div>
     </section>
     
     <script>
+    const makeRecipe={
+       props:["r_list"],
+       template:`
+         <div class="row">
+    	   <div class="col-md-3" v-for="vo in r_list">
+		    <div class="thumbnail">
+		      <a href="#">
+		        <img :src="vo.poster" style="width:100%">
+		        <div class="caption">
+		          <p class="a">{{vo.title}}</p>
+		        </div>
+		      </a>
+		    </div>
+		  </div>
+         </div>
+       `
+    }
     let chefApp=Vue.createApp({
    	 data(){
    		 return {
@@ -102,9 +157,16 @@
    			 }).then(response=>{
    				 console.log(response.data)
    				 this.recipe_list=response.data
-   			 }).catch(error=>{
+   				 alert("1")
+   				 $('#dialog').dialog({
+   					 autoOpen:false,
+   					 modal:true,
+   					 width:700,
+   					 height:600
+   				 }).dialog("open")
+   			 })/*.catch(error=>{
    				 console.log(error.response)
-   			 })
+   			 })*/
    		 },
    		 prev(){
    			 this.curpage=this.startPage-1
@@ -146,7 +208,7 @@
    		 }
    	 },
    	 components:{
-   		 
+   		 "make_dialog":makeRecipe
    	 }
     }).mount('#listApp')
     </script>

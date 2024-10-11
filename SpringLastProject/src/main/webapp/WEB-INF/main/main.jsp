@@ -50,6 +50,7 @@
     <!-- ****** Footer End ****** -->
 
     <!-- Jquery-2.2.4 js -->
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script> -->
     <script src="../js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
     <script src="../js/bootstrap/popper.min.js"></script>
