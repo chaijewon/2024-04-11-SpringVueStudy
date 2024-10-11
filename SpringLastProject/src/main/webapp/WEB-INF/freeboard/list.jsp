@@ -70,9 +70,9 @@
 			              </tr>
 			              <tr>
 			                <td colspan="5" class="text-center">
-			                 <button class="btn-sm btn-danger">이전</button>
+			                 <button class="btn-sm btn-danger" v-on:click="prev()">이전</button>
 			                 {{curpage}} page / {{totalpage}} pages
-			                 <button class="btn-sm btn-danger">다음</button>
+			                 <button class="btn-sm btn-danger" @click="next()">다음</button>
 			                </td>
 			              </tr>
 			             </table>
@@ -102,6 +102,14 @@
     	   },
     	   // 사용자 요청에 따라 데이터를 변경 
     	   methods:{
+    		   prev(){
+    			  this.curpage=this.curpage>1?this.curpage-1:this.curpage
+    			  this.dataRecv()
+    		   },
+    		   next(){
+    			   this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage
+    			   this.dataRecv()
+    		   },
     		   //1. 공통으로 적용되는 기능을 설정 => 목록 읽기
     		   dataRecv(){
     			   axios.get('../freeboard/list_vue.do',{

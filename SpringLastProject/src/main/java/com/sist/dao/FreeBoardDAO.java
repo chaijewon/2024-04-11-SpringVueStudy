@@ -71,4 +71,22 @@ public class FreeBoardDAO {
    {
 	   mapper.freeboardDelete(no);
    }
+   /*
+    *  @Select("SELECT no,subject,content FROM spring_freeboard "
+		 +"WHERE no=#{no}")
+	  public FreeBoardVO freeboardUpdateData(int no);
+	  
+	  @Update("UPDATE spring_freeboard SET "
+			 +"subject=#{subject} , content=#{content} "
+			 +"WHERE no=#{no}")
+	  public void freeboardUpdate(FreeBoardVO vo);
+    */
+   public FreeBoardVO freeboardUpdateData(int no)
+   {
+	   return mapper.freeboardUpdateData(no);
+   }
+   public void freeboardUpdate(FreeBoardVO vo)
+   {
+	   mapper.freeboardUpdate(vo);
+   }
 }

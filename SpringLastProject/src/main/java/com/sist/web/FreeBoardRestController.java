@@ -110,6 +110,29 @@ public class FreeBoardRestController {
 	   }
 	   return result;
    }
+   @GetMapping(value = "freeboard/update_vue.do",produces = "text/plain;charset=UTF-8")
+   public String freeboard_update(int no) throws Exception
+   {
+	   FreeBoardVO vo=fService.freeboardUpdateData(no);
+	   ObjectMapper mapper=new ObjectMapper();
+	   String json=mapper.writeValueAsString(vo);
+	   return json;
+   }
+   @PostMapping(value="freeboard/update_ok_vue.do",produces = "text/plain;charset=UTF-8")
+   public String freeboard_update_ok(FreeBoardVO vo)
+   {
+	   String result="";
+	   try
+	   {
+		   
+		   fService.freeboardUpdate(vo);
+		   result="yes";
+	   }catch(Exception ex)
+	   {
+		   result=ex.getMessage();   
+	   }
+	   return result;
+   }
 }
 
 

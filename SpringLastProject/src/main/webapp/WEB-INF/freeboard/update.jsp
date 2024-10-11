@@ -70,10 +70,93 @@
     		 }
     	 },
     	 mounted(){
-    		// 시작과 동시에 자동으로 처리  
+    		// 시작과 동시에 자동으로 처리 
+    		axios.get('../freeboard/update_vue.do',{
+    			params:{
+    				no:this.no
+    			}
+    		}).then(response=>{
+    			console.log(response.data)
+    			this.subject=response.data.subject
+    			this.content=response.data.content
+    			// 변수값이 갱신 => v-model로 값을 전송 => HTML값을 변경해서 출력 (자동화 처리 : React)
+    			/*
+    			    Back-End => 웹개발(AI) => 유지보수 
+    			    Front-End => Vue / React => Full Stack
+    			*/
+    			/*
+    			    response={
+    				   config:{}, => response.config
+    				   data:{subject:'',content:''}, => response.data : 실제 서버에서 전송된 값
+    				   header:{} => response.header
+    			    }
+    			
+    			    response.data={subject:'',content:''} => 객체 
+    			                  ======================== 멤버변수 
+    			                 .subject
+    			*/
+    		}).catch(error=>{
+    			console.log(error.response)
+    		})
     	 },
     	 methods:{
     		// 버튼 => 사용자 요청 처리 
+    		boardUpdate(){
+    			if(this.subject==="")
+    			{
+    				this.$refs.subject.focus()
+    				return 
+    			}
+    			if(this.content==="")
+    			{
+    				this.$refs.content.focus()
+    				return 
+    			}
+    			/*
+    			   $.ajax({
+    				   type:'post',
+    				   url:'',
+    				   data:{},
+    				   success:function(response)
+    				   {
+    					   
+    				   }
+    			   })
+    			   
+    			   @PutMapping / @DeleteMapping
+    			   
+    			   // Rest => GET/POST/PUT/DELETE
+    			               |    |   |    |
+    			                            Delete
+    			                      Update
+    			                   Insert
+    			              Select
+    			   axios({
+    				   type:
+    				   url:
+    			   })
+    			*/
+    			// 서버로 전송 
+    			axios.post('../freeboard/update_ok_vue.do',null,{
+    				params:{
+    					no:this.no,
+    					subject:this.subject,
+    					content:this.content
+    				}
+    			}).then(response=>{
+    				// then((response)=>{})
+    				if(response.data==="yes")
+    				{
+    				    location.href="../freeboard/detail.do?no="+this.no	
+    				}
+    				else
+    				{
+    					alert(response.data)
+    				}
+    			}).catch(error=>{
+    				console.log(error.response)
+    			})
+    		}
     	 }
      }).mount('#updateApp')
     </script>

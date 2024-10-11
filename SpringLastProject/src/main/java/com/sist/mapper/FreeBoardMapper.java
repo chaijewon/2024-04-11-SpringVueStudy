@@ -41,4 +41,14 @@ public interface FreeBoardMapper {
   @Delete("DELETE FROM spring_freeboard "
 		 +"WHERE no=#{no}")
   public void freeboardDelete(int no);
+  
+  // 수정 
+  @Select("SELECT no,subject,content FROM spring_freeboard "
+		 +"WHERE no=#{no}")
+  public FreeBoardVO freeboardUpdateData(int no);
+  
+  @Update("UPDATE spring_freeboard SET "
+		 +"subject=#{subject} , content=#{content} "
+		 +"WHERE no=#{no}")
+  public void freeboardUpdate(FreeBoardVO vo);
 }
