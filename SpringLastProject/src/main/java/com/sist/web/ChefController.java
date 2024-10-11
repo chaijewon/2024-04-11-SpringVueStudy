@@ -34,6 +34,6 @@ public class ChefController {
    */
   public String chef_list()
   {
-	  return "chef/list";  
+	  return "chef/make";  
   }
 }

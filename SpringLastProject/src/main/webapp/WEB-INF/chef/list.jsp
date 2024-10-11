@@ -77,9 +77,11 @@
                     <tr>
                      <td class="text-center">
                       <ul class="pagination">
+                      
                         <li><a class="nav-link" @click="prev()">&lt;</a></li>
                         <li v-for="i in range(startPage,endPage)" :class="i===curpage?'active':''" ><a class="nav-link" @click="pageChange(i)">{{i}}</a></li>
                         <li><a class="nav-link" @click="next()">&gt;</a></li>
+                      
                       </ul>
                      </td>
                     </tr>
