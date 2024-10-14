@@ -17,6 +17,16 @@
    <put-attribute name="mypage_home" value="/WEB-INF/mypage/{1}.jsp"/>
  </definition>
  
+ <definition name="admin" template="/WEB-INF/admin/admin_main.jsp">
+   <put-attribute name="header" value="/WEB-INF/main/header.jsp"/>
+   <put-attribute name="admin_menu" value="/WEB-INF/admin/admin_menu.jsp"></put-attribute>
+   <put-attribute name="admin_home" value="/WEB-INF/admin/admin_home.jsp"/>
+   <put-attribute name="footer" value="/WEB-INF/main/footer.jsp"/>
+ </definition>
+ <definition name="admin/*" extends="admin">
+   <put-attribute name="admin_home" value="/WEB-INF/admin/{1}.jsp"/>
+ </definition>
+ 
  <definition name="*/*" extends="main">
    <put-attribute name="home" value="/WEB-INF/{1}/{2}.jsp"/>
  </definition>

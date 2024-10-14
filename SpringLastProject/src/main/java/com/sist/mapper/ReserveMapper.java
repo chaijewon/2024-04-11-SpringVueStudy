@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 public interface ReserveMapper {
@@ -38,11 +39,48 @@ public interface ReserveMapper {
 	  @Result(property = "fvo.poster" , column = "poster"),
 	  @Result(property = "fvo.name",column = "name")
   })
-  @Select("SELECT rno,sr.fno,poster,name,rday,rtime,rinwon,TO_CHAR(regdate,'YYYY-MM-DD') as dbday "
+  @Select("SELECT rno,sr.fno,poster,name,rday,rtime,rinwon,"
+  		 + "TO_CHAR(regdate,'YYYY-MM-DD') as dbday,isReserve "
 		 +"FROM spring_reserve sr,project_food_house pf "
 		 +"WHERE sr.fno=pf.fno "
-		 +"AND id=#{id}"
+		 +"AND id=#{id} "
+		 +"ORDER BY rno DESC"
 		 )
   public List<ReserveVO> reserveMyPageListData(String id);
   // 어드민 페이지 출력 
+  @Results({
+	  @Result(property = "fvo.poster" , column = "poster"),
+	  @Result(property = "fvo.name",column = "name")
+  })
+  @Select("SELECT rno,sr.fno,id,poster,name,rday,rtime,rinwon,"
+  		+ "TO_CHAR(regdate,'YYYY-MM-DD') as dbday,isReserve "
+		 +"FROM spring_reserve sr,project_food_house pf "
+		 +"WHERE sr.fno=pf.fno "
+		 +"ORDER BY rno DESC"
+		 )
+  public List<ReserveVO> reserveAdminListData();
+  
+  @Update("UPDATE spring_reserve SET "
+		 +"isReserve=1 "
+		 +"WHERE rno=#{rno}")
+  public void reserveOk(int rno);
+  // 예약 정보 
+  @Results({
+	  @Result(property = "fvo.name",column = "name"),
+	  @Result(property = "fvo.poster",column = "poster"),
+	  @Result(property = "fvo.type",column = "type"),
+	  @Result(property = "fvo.address",column = "address"),
+	  @Result(property = "fvo.phone",column = "phone"),
+	  @Result(property = "fvo.score",column = "score"),
+	  @Result(property = "fvo.time",column = "time"),
+	  @Result(property = "fvo.parking",column = "parking"),
+	  @Result(property = "fvo.theme",column = "theme"),
+	  @Result(property = "fvo.content",column = "content")
+  })
+  @Select("SELECT rno,rday,rtime,rinwon,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
+		 +"name,poster,type,address,phone,score,time,parking,theme,content "
+		 +"FROM spring_reserve sr,project_food_house pf "
+		 +"WHERE sr.fno=pf.fno "
+		 +"AND rno=#{rno}")
+  public ReserveVO reserveInfoData(int rno);
 }

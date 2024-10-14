@@ -2,6 +2,7 @@ package com.sist.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.*;
@@ -45,5 +46,32 @@ public class ReserveDAO {
    public List<ReserveVO> reserveMyPageListData(String id)
    {
 	   return mapper.reserveMyPageListData(id);
+   }
+   public List<ReserveVO> reserveAdminListData()
+   {
+	   return mapper.reserveAdminListData();
+   }
+   /*
+    *  @Update("UPDATE spring_reserve SET "
+		 +"isReserve=1 "
+		 +"WHERE rno=#{rno}")
+        public void reserveOk(int rno);
+  
+    */
+   public void reserveOk(int rno)
+   {
+	   mapper.reserveOk(rno);
+   }
+   /*
+    *   @Select("SELECT rno,rday,rtime,rinwon,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
+		 +"name,poster,type,address,phone,score,time,parking,theme,content "
+		 +"FROM spring_reserve sr,project_food_house pf "
+		 +"WHERE sr.fno=pf.fno "
+		 +"AND rno=#{rno}")
+  public ReserveVO reserveInfoData(int rno);
+    */
+   public ReserveVO reserveInfoData(int rno)
+   {
+	   return mapper.reserveInfoData(rno);
    }
 }
