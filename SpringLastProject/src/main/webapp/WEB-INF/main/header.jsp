@@ -110,8 +110,8 @@
                                         <a class="dropdown-item" href="../food/list.do">맛집목록</a>
                                         <a class="dropdown-item" href="../food/find.do">맛집검색</a>
                                         <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-                                         <a class="dropdown-item" href="single.html">맛집예약</a>
-                                         <a class="dropdown-item" href="static.html">맛집추천</a>
+                                         <a class="dropdown-item" href="../reserve/reserve_main.do">맛집예약</a>
+                                         <a class="dropdown-item" href="../recommand/recommand_main.do">맛집추천</a>
                                         </sec:authorize>
                                     </div>
                                 </li>

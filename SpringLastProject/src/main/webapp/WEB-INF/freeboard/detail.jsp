@@ -68,10 +68,17 @@
                            <button class="btn btn-xs btn-success" @click="boardDelete()"
                              v-show="sessionId===vo.id"
                            >삭제</button>
+                           <button class="btn btn-xs btn-success" @click="boardConfig()"
+                           >통계</button>
                            <a href="../freeboard/list.do" class="btn btn-xs btn-info">목록</a>
                           </td>
                         </tr>
                       </table>
+                    </div>
+                    <div v-show="isShow">
+                     <div class="text-center">
+                       <img src="../img/emp.png">
+                     </div>
                     </div>
                 </div>
             </div>
@@ -83,7 +90,8 @@
     		return {
     			vo:{},
     			no:${no},
-    			sessionId:'${sessionId}'
+    			sessionId:'${sessionId}',
+    			isShow:false
     		}  
     	  },
     	  mounted(){
@@ -99,6 +107,13 @@
     		  })
     	  },
     	  methods:{
+    		  boardConfig(){
+    			this.isShow=true
+    			axios.get('http://localhost:8000/web/emp')
+    			.then(response=>{
+    				
+    			})
+    		  },
     		  boardDelete(){
     			  axios.get('../freeboard/delete_vue.do',{
     				  params:{

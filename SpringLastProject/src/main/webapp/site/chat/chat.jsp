@@ -97,6 +97,11 @@ $(function(){
                           <input type=button class="btn-sm btn-info"
                             value="퇴장">  
                         </td>
+                        <td>
+                         접속자:<select id="conn">
+                            <option value="접속자">접속자</option>
+                         </select>
+                        </td>
                       </tr>
                       <tr>
                         <td>
@@ -116,6 +121,7 @@ $(function(){
                 </div>
             </div>
         </div>
+        
     </section>
   </body>
 </html>
