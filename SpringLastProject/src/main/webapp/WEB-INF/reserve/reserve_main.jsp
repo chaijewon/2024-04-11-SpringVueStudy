@@ -5,6 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.food-click:hover{
+  cursor: pointer;
+}
+</style>
+<link href='https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@5.11.3/main.css' rel='stylesheet' />
+<script src="
+https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js
+"></script>
 </head>
 <body>
 <!-- ****** Breadcumb Area Start ****** -->
@@ -61,7 +70,8 @@
                                <th class="text-center"></th>
                                <th class="text-center">업체명</th>
                              </tr>
-                             <tr v-for="vo in food_list">
+                             <tr v-for="vo in food_list" class="food-click" 
+                                @click="foodSelect(vo.fno,vo.poster,vo.name)">
                                <td class="text-center">
                                 <img :src="'http://menupan.com'+vo.poster" 
                                    style="width: 35px;height: 35px">
@@ -80,26 +90,77 @@
                           
                          
                        </td>
-                       <td width="45%" height="500">
+                       <td width="50%" height="500">
                          <table class="table">
-                          <caption><h4>예약일 정보</h4></caption>
+                          <tr>
+                           <td>
+                             <h4>예약일 정보</h4>
+                           </td>
+                          </tr>
+                          <tr v-show="isDate">
+                           <td>
+                             <div id="calendar"></div>
+                           </td>
+                          </tr>
                          </table>
                        </td>
-                       <td width="35%" height="500" rowspan="2">
+                       <td width="30%" height="500" rowspan="2">
                          <table class="table">
-                          <caption><h4>예약 정보</h4></caption>
+                          <tr>
+                           <td colspan="2">
+                            <h4>예약 정보</h4></caption>
+                           </td>
+                           </tr>
+                           <tr>
+                             <td colspan="2" class="text-center">
+                              <img :src="image" style="width: 200px;height: 150px">
+                             </td>
+                           </tr>
+                           <tr>
+                             <th width=30% class="text-center">업체명</th>
+                             <td width="70%">{{name}}</td>
+                           </tr>
+                           <tr>
+                             <th width=30% class="text-center">예약일</th>
+                             <td width="70%">{{day}}</td>
+                           </tr>
                          </table>
+                         
                        </td>
                       </tr>
                       <tr>
                         <td width="30%" height="150">
                           <table class="table">
-                           <caption><h4>시간 정보</h4></caption>
+                           <tr>
+                            <td>
+                              <h4>시간 정보</h4>
+                            </td>
+                           </tr>
+                           <tr v-show="isTime">
+                            <td class="text-center">
+                             <span class="btn btn-xs btn-success" v-for="t in time_list" style="margin: 1px"
+                              @click="timeSelect(t)"
+                             >
+                               {{t}}
+                             </span>
+                            </td>
+                           </tr>
                           </table>
                         </td>
                         <td width="35%" height="150">
                           <table class="table">
-                           <caption><h4>인원 정보</h4></caption>
+                           <tr>
+                            <td>
+                             <h4>인원 정보</h4>
+                            </td>
+                           </tr>
+                           <tr v-show="isInwon">
+                             <td class="text-center">
+                              <span class="btn btn-xs btn-danger" v-for="i in inwon_list" style="margin-left: 1px">
+                                {{i}}
+                              </span>
+                             </td>
+                           </tr>
                           </table>
                         </td>
                       </tr>
@@ -116,18 +177,75 @@
     		     type:'한식',
     		     curpage:1,
     		     totalpage:0,
-    		     food_list:[]
+    		     food_list:[],
+    		     image:'../img/icon/noimage.png',
+    		     fno:0,
+    		     name:'',
+    		     isDate:false,
+    		     day:'',
+    		     time:'',
+    		     inwon:'',
+    		     time_list:[],
+    		     inwon_list:[],
+    		     isTime:false,
+    		     isInwon:false,
+    		     isReserveBtn:false
     		  }
     	  },
     	  // 실행시에 자동 호출되는 메소드 
     	  // => useEffect() / componentDidMount() => react 
     	  // $(function(){})
     	  mounted(){
+    		this.dataRecv()
+    		// 달력 출력 
+    			    let date = new Date();
+    	      	    let year = date.getFullYear();
+    	      	    let month = ("0" + (1 + date.getMonth())).slice(-2);
+    	      	    let day = ("0" + date.getDate()).slice(-2);
+    	      		let _this=this
+    	      		document.addEventListener('DOMContentLoaded', function() {
+    	      		    var calendarEl = document.getElementById('calendar');
+    	      		    var calendar = new FullCalendar.Calendar(calendarEl, {
+    	      		    	initialView: 'dayGridMonth',
+    	      		    	  /*headerToolbar: {
+    	      		            left: 'prev,next today',
+    	      		            center: 'title'
+    	      		          },*/
+    	      		          height:450,
+    	      		          width:400,
+    	      		          validRange: {
+    	      		        	    start: year+"-"+month+"-"+day
+    	      		          },
+    	      		          themeSystem: 'bootstrap',	// 이렇게 설정하면 다크모트 라이트모드 가능
+    	      		          editable: true,
+    	      		          droppable: true, // this allows things to be dropped onto the calendar !!!
+    	      		          dateClick: ((info) => {
+    	      		               //location.href="http://daum.net"
+    	      		               //alert('Click Date:'+info.dateStr)
+    	      		               _this.day=info.dateStr
+    	      		               _this.isTime=true
+    	      		          })
+    	      		        });
+    	      		    calendar.render();
+    	      		    });
     		  // window.onload => 화면에 출력하기 전에 처리 
-    		  this.dataRecv()
+    		  
     	  },
     	  // data() , methods => Vue클래스의 멤버변수,멤버메소드 => 사용시에는 반드시 this.
     	  methods:{
+    		  timeSelect(t){
+    			  this.time=t
+    			  this.isInwon=true
+    		  },
+    		  foodSelect(fno,poster,name){
+    			  this.fno=fno
+    			  this.image='http://menupan.com'+poster
+    			  this.name=name
+    			  this.isDate=true
+    			  
+    			    
+    			  
+    		  },
     		  prev(){
     			  this.curpage=this.curpage>1?this.curpage-1:this.curpage
     			  this.dataRecv()
@@ -159,6 +277,8 @@
     				  // response.data={name:'',sex:'',address:''}
     				  //                 객체 
     				  // response.data.name , response.data.sex , response.data.address
+    				  this.time_list=response.data.tList
+    				  this.inwon_list=response.data.iList
     			  }).catch(error=>{
     				  console.log(error.response)
     			  })

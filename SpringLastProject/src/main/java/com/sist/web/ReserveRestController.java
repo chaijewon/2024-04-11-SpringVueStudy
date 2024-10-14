@@ -35,6 +35,27 @@ public class ReserveRestController {
 	  map.put("totalpage", totalpage); // response.data={}
 	  map.put("type", type);
 	  
+	  List<String> tList=new ArrayList<String>();
+	  tList.add("09:00");
+	  tList.add("11:00");
+	  tList.add("13:00");
+	  tList.add("15:00");
+	  tList.add("17:00");
+	  tList.add("19:00");
+	  tList.add("20:00");
+	  tList.add("21:00");
+	  tList.add("22:00");
+	  
+	  List<String> iList=new ArrayList<String>();
+	  for(int i=1;i<=10;i++)
+	  {
+		  iList.add(String.valueOf(i));
+	  }
+	  iList.add("단체");
+	  
+	  map.put("tList", tList);
+	  map.put("iList", iList);
+	  
 	  ObjectMapper mapper=new ObjectMapper();
 	  String json=mapper.writeValueAsString(map);
 	  
