@@ -124,6 +124,19 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js
                              <th width=30% class="text-center">예약일</th>
                              <td width="70%">{{day}}</td>
                            </tr>
+                           <tr>
+                             <th width=30% class="text-center">시간</th>
+                             <td width="70%">{{time}}</td>
+                           </tr>
+                           <tr>
+                             <th width=30% class="text-center">인원</th>
+                             <td width="70%">{{inwon}}</td>
+                           </tr>
+                           <tr v-show="isReserveBtn">
+                             <td colspan="2" class="text-center">
+                               <button class="btn-lg btn-primary" @click="reserve()">예약</button>
+                             </td>
+                           </tr>
                          </table>
                          
                        </td>
@@ -156,7 +169,9 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js
                            </tr>
                            <tr v-show="isInwon">
                              <td class="text-center">
-                              <span class="btn btn-xs btn-danger" v-for="i in inwon_list" style="margin-left: 1px">
+                              <span class="btn btn-xs btn-danger" v-for="i in inwon_list" style="margin-left: 1px"
+                               @click="inwonSelect(i)"
+                              >
                                 {{i}}
                               </span>
                              </td>
@@ -233,6 +248,32 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js
     	  },
     	  // data() , methods => Vue클래스의 멤버변수,멤버메소드 => 사용시에는 반드시 this.
     	  methods:{
+    		  reserve(){
+    			axios.post('../reserve/reserve_ok_vue.do',null,{
+    				params:{
+    					fno:this.fno,
+    					rday:this.day,
+    					rtime:this.time,
+    					rinwon:this.inwon
+    				}
+    			}).then(response=>{
+    				// 이동 => mypage 
+    				if(response.data==='yes')
+    				{
+    					location.href="../mypage/mypage_reserve.do"
+    				}
+    				else
+    				{
+    					alert(response.data)
+    				}
+    			}).catch(error=>{
+    				console.log(error.response)
+    			})
+    		  },
+    		  inwonSelect(i){
+    			this.inwon=i
+    			this.isReserveBtn=true
+    		  },
     		  timeSelect(t){
     			  this.time=t
     			  this.isInwon=true

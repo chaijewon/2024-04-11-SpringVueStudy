@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,5 +31,19 @@ public class ReserveDAO {
    public int reserveFoodTotalPage(Map map)
    {
 	   return mapper.reserveFoodTotalPage(map);   
+   }
+   /*
+    *   @Insert("INSERT INTO spring_reserve(rno,fno,id,rday,rtime,rinwon) "
+		 +"VLAUES(sr2_rno_seq.nextval,#{fno},#{id},"
+		 +"#{rday},#{rtime},#{rinwon})")
+        public void reserveInsert(ReserveVO vo);
+    */
+   public void reserveInsert(ReserveVO vo)
+   {
+	   mapper.reserveInsert(vo);
+   }
+   public List<ReserveVO> reserveMyPageListData(String id)
+   {
+	   return mapper.reserveMyPageListData(id);
    }
 }
