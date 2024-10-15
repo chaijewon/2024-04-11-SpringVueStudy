@@ -23,4 +23,5 @@ public class GoodsController {
 	   model.addAttribute("no", no);
 	   return "goods/detail";
    }
+   
 }

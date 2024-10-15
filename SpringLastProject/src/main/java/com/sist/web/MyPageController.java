@@ -22,4 +22,9 @@ public class MyPageController {
   {
 	  return "mypage/mypage_cart";
   }
+  @GetMapping("mypage/mypage_buy.do")
+  public String mypage_buy()
+  {
+	  return "mypage/mypage_buy";
+  }
 }

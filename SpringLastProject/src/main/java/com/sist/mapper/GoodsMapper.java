@@ -1,6 +1,7 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -69,5 +70,29 @@ public interface GoodsMapper {
 		  +"AND id=#{id} AND isBuy=0 "
 		  +"ORDER BY cno DESC")
    public List<CartVO> goodsCartListData(String id);
+   
+   // 취소 
+   @Delete("DELETE FROM spring_cart "
+		  +"WHERE cno=#{cno}")
+   public void goodsCartCancel(int cno);
+   
+   // 구매 
+   @Update("UPDATE spring_cart SET "
+		  +"isBuy=1 "
+		  +"WHERE cno=#{cno}")
+   public void goodsBuy(int cno);
+   
+   @Results({
+	   @Result(property = "gvo.goods_name",column = "goods_name"),
+	   @Result(property = "gvo.goods_poster",column = "goods_poster"),
+	   @Result(property = "gvo.goods_price",column = "goods_price")
+   })
+   @Select("SELECT cno,gno,account,isBuy,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
+		  +"goods_name,goods_poster,goods_price "
+		  +"FROM spring_cart sc,goods_all ga "
+		  +"WHERE sc.gno=ga.no "
+		  +"AND id=#{id} AND isBuy=1 "
+		  +"ORDER BY cno DESC")
+   public List<CartVO> goodsBuyListData(String id);
    
 }

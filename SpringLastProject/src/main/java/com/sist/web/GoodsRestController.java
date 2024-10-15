@@ -91,4 +91,70 @@ public class GoodsRestController {
 	  }
 	  return result;
   }
+  @GetMapping(value="goods/cart_cancel_vue.do",produces = "text/plain;charset=UTF-8")
+  public String cart_cancel(int cno,HttpSession session) throws Exception
+  {
+	  gService.goodsCartCancel(cno);
+	  String id=(String)session.getAttribute("userId");
+	  List<CartVO> list=gService.goodsCartListData(id);
+	  ObjectMapper mapper=new ObjectMapper();
+	  String json=mapper.writeValueAsString(list);
+	  return json;
+  }
+  @GetMapping(value="goods/goods_detail_vue.do",produces = "text/plain;charset=UTF-8")
+  public String goods_detail_cart(int gno) throws Exception
+  {
+	  GoodsVO vo=gService.goodsDetailData(gno);
+	  String temp=vo.getGoods_price();
+	  temp=temp.replaceAll("[^0-9]", "");// 숫자외에 나머지 제거 
+	  vo.setPrice(Integer.parseInt(temp.trim()));
+	  
+	  ObjectMapper mapper=new ObjectMapper();
+	  String json=mapper.writeValueAsString(vo); // vo = response.data
+	  
+	  return json;
+  }
+  @GetMapping(value="goods/goods_buy_vue.do",produces = "text/plain;charset=UTF-8")
+  public String goods_buy(int cno,int gno,HttpSession session) throws Exception
+  {
+	  gService.goodsBuy(cno);
+	  GoodsVO vo=gService.goodsDetailData(gno);
+	  String temp=vo.getGoods_price();
+	  temp=temp.replaceAll("[^0-9]", "");
+	  vo.setPrice(Integer.parseInt(temp.trim()));
+	
+	  String id=(String)session.getAttribute("userId");
+	  
+	  MemberVO mvo=gService.memberInfodData(id);
+	  
+	  Map map=new HashMap();
+	  map.put("gvo",vo);
+	  map.put("mvo", mvo);
+	  
+	  ObjectMapper mapper=new ObjectMapper();
+	  String json=mapper.writeValueAsString(map);
+	  
+	  return json;
+  }
+  @GetMapping(value="goods/buy_vue.do",produces = "text/plain;charset=UTF-8")
+  public String goods_buy_vue(HttpSession session)throws Exception
+  {
+	  String id=(String)session.getAttribute("userId");
+	  List<CartVO> list=gService.goodsBuyListData(id);
+	  ObjectMapper mapper=new ObjectMapper();
+	  String json=mapper.writeValueAsString(list);
+	  return json;
+  }
+  
+  @GetMapping(value="goods/cart_cancel_vue2.do",produces = "text/plain;charset=UTF-8")
+  public String cart_cancel2(int cno,HttpSession session) throws Exception
+  {
+	  gService.goodsCartCancel(cno);
+	  String id=(String)session.getAttribute("userId");
+	  List<CartVO> list=gService.goodsBuyListData(id);
+	  ObjectMapper mapper=new ObjectMapper();
+	  String json=mapper.writeValueAsString(list);
+	  return json;
+  }
+ 
 }
