@@ -75,7 +75,15 @@ public class GoodsRestController {
 		  vo.setAccount(account);
 		  vo.setId(id);
 		  // 오라클 저장 
-		  gService.goodsCartInsert(vo);
+		  int count=gService.goodsCartGnoCount(gno);
+		  if(count==0)
+		  {
+		      gService.goodsCartInsert(vo);
+		  }
+		  else
+		  {
+			  gService.goodsCartAccountUpdate(vo);
+		  }
 		  result="yes";
 	  }catch(Exception ex)
 	  {

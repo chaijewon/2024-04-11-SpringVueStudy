@@ -8,4 +8,7 @@ public interface GoodsService {
 	public GoodsVO goodsDetailData(int no);
 	public MemberVO memberInfodData(String userId);
 	public void goodsCartInsert(CartVO vo);
+	public void goodsCartAccountUpdate(CartVO vo);
+	public int goodsCartGnoCount(int gno);
+	public List<CartVO> goodsCartListData(String id);
 }

@@ -45,5 +45,23 @@ public class GoodsServiceImpl implements GoodsService{
 		// TODO Auto-generated method stub
 		gDao.goodsCartInsert(vo);
 	}
+
+	@Override
+	public void goodsCartAccountUpdate(CartVO vo) {
+		// TODO Auto-generated method stub
+		gDao.goodsCartAccountUpdate(vo);
+	}
+
+	@Override
+	public int goodsCartGnoCount(int gno) {
+		// TODO Auto-generated method stub
+		return gDao.goodsCartGnoCount(gno);
+	}
+
+	@Override
+	public List<CartVO> goodsCartListData(String id) {
+		// TODO Auto-generated method stub
+		return gDao.goodsCartListData(id);
+	}
   
 }

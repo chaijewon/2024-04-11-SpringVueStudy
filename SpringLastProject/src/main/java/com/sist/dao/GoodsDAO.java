@@ -1,6 +1,8 @@
 package com.sist.dao;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +70,40 @@ public class GoodsDAO {
   public void goodsCartInsert(CartVO vo)
   {
 	  mapper.goodsCartInsert(vo);
+  }
+  /*
+   *   @Update("UPDATE spring_cart SET "
+		  +"account=account+#{account} "
+		  +"WHERE cno=#{cno}")
+       public void goodsCartAccountUpdate(CartVO vo);
+   */
+  public void goodsCartAccountUpdate(CartVO vo)
+  {
+	  mapper.goodsCartAccountUpdate(vo);
+  }
+  /*
+   *   @Select("SELECT COUNT(*) FROM spring_cart "
+		  +"WHERE gno=#{gno}")
+       public int goodsCartGnoCount(int gno);
+   */
+  public int goodsCartGnoCount(int gno)
+  {
+	  return mapper.goodsCartGnoCount(gno);
+  }
+  /*
+   *   @Results({
+	   @Result(property = "gvo.goods_name",column = "goods_name"),
+	   @Result(property = "gvo.goods_poster",column = "goods_poster"),
+	   @Result(property = "gvo.goods_price",column = "goods_price")
+   })
+   @Select("SELECT cno,gno,account,isBuy,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
+		  +"goods_name,goods_poster,goods_price "
+		  +"FROM spring_cart sc,goods_all ga "
+		  +"WHERE sc.gno=ga.no "
+		  +"AND id=#{id}")
+   public List<CartVO> goodsCartListData(String id);
+   */
+  public List<CartVO> goodsCartListData(String id){
+	  return mapper.goodsCartListData(id);
   }
 }
