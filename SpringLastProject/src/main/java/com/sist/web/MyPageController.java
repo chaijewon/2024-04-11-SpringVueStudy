@@ -16,4 +16,10 @@ public class MyPageController {
   {
 	  return "mypage/mypage_reserve";
   }
+  
+  @GetMapping("mypage/mypage_cart.do")
+  public String mypage_cart()
+  {
+	  return "mypage/mypage_cart";
+  }
 }

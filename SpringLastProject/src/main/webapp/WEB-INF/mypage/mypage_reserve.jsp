@@ -10,6 +10,11 @@
  <div id="mypageApp">
    <table class="table">
     <tr>
+      <td class="text-center" colspan="8">
+        <h4>예약관리</h4>
+      </td>
+    </tr>
+    <tr>
       <th class="text-center">번호</th>
       <th class="text-center"></th>
       <th class="text-center">업체명</th>

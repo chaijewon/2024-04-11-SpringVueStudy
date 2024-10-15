@@ -97,9 +97,9 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js
                              <h4>예약일 정보</h4>
                            </td>
                           </tr>
-                          <tr v-show="isDate">
+                          <tr>
                            <td>
-                             <div id="calendar"></div>
+                             <div id="calendar" v-show="isDate"></div>
                            </td>
                           </tr>
                          </table>
@@ -210,10 +210,15 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js
     	  // 실행시에 자동 호출되는 메소드 
     	  // => useEffect() / componentDidMount() => react 
     	  // $(function(){})
+    	  beforeMount(){
+    		   
+    	  },
     	  mounted(){
-    		this.dataRecv()
-    		// 달력 출력 
-    			    let date = new Date();
+    		        this.dataRecv()
+    		        // 달력 출력 
+    			    
+    		  // window.onload => 화면에 출력하기 전에 처리 
+    		        let date = new Date();
     	      	    let year = date.getFullYear();
     	      	    let month = ("0" + (1 + date.getMonth())).slice(-2);
     	      	    let day = ("0" + date.getDate()).slice(-2);
@@ -243,7 +248,6 @@ https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js
     	      		        });
     	      		    calendar.render();
     	      		    });
-    		  // window.onload => 화면에 출력하기 전에 처리 
     		  
     	  },
     	  // data() , methods => Vue클래스의 멤버변수,멤버메소드 => 사용시에는 반드시 this.

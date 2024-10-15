@@ -235,9 +235,7 @@
                                 <div class="add-text">
                                     <div class="yummy-table">
                                         <div class="yummy-table-cell">
-                                            <h2>Goods By</h2>
-                                            <p>Buy Goods Online Now!</p>
-                                            <a href="#" class="add-btn">Buy Now</a>
+                                            <embed src="http://youtube.com/embed/GSPeTBjS9eo\u0026pp=ygUK7Jik66mU6rCAMw%3D%3D" style="width:100%"></embed>
                                         </div>
                                     </div>
                                 </div>

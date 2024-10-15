@@ -103,7 +103,7 @@
                                  <c:if test="${sessionScope.userId!=null }">
                                   <a href="#" class="btn btn-xs btn-danger">좋아요</a>
                                   <a href="#" class="btn btn-xs btn-success">찜하기</a>
-                                  <a href="#" class="btn btn-xs btn-info">예약</a>
+                                  <a href="../reserve/reserve_main.do" class="btn btn-xs btn-info">예약</a>
                                  </c:if>
                                   <a href="../food/list.do" class="btn btn-xs btn-warning">목록</a>
                                   <a href="http://127.0.0.1:8000/web/" class="btn btn-xs btn-warning">실시간 교통사항</a>

@@ -136,7 +136,7 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">스토어</a>
+                                    <a class="nav-link" href="../goods/list.do">스토어</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">커뮤니티</a>
@@ -154,7 +154,7 @@
                                 </li>
                                 <sec:authorize access="hasRole('ROLE_USER')">
                                  <li class="nav-item">
-                                    <a class="nav-link" href="#">빠른예약</a>
+                                    <a class="nav-link" href="../reserve/reserve_main.do">빠른예약</a>
                                  </li>
                                 </sec:authorize>
                                 
