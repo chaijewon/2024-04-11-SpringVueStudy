@@ -146,10 +146,9 @@
                                         <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
                                          <a class="dropdown-item" href="single.html">1:1채팅</a>
                                          <a class="dropdown-item" href="archive.html">묻고답하기</a>
+                                         <a class="dropdown-item" href="../chat/chat.do">실시간 채팅</a>
                                         </sec:authorize>
-                                        
-                                        <a class="dropdown-item" href="../chat/chat.do">실시간 채팅</a>
-                                                                       
+                                              
                                     </div>
                                 </li>
                                 <sec:authorize access="hasRole('ROLE_USER')">
