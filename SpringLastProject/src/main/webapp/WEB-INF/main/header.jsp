@@ -132,7 +132,7 @@
                                         <a class="dropdown-item" href="../seoul/nature.do">자연 & 관광</a>
                                         <a class="dropdown-item" href="../seoul/shop.do">쇼핑</a>
                                         <a class="dropdown-item" href="single.html">여행 코스</a>
-                                        <a class="dropdown-item" href="single.html">실시간 날씨</a>
+                                        <a class="dropdown-item" href="../seoul/weather.do">실시간 날씨</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">

@@ -1,13 +1,19 @@
 package com.sist.web;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sist.dao.NaverDAO;
+import com.sist.manager.NaverNewsManager;
 import com.sist.service.FoodService;
 import com.sist.service.RecipeService;
+
+import java.net.URLEncoder;
 /*
  *   정리 
  *   스프링 
@@ -96,6 +102,9 @@ import com.sist.service.RecipeService;
  */
 // jsp연동 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.sist.vo.*;
 @Controller
 
@@ -105,10 +114,20 @@ public class MainController {
    private RecipeService rService;
    @Autowired
    private FoodService fService;
+   
+   @Autowired
+   private NaverNewsManager mgr;
+   
+   @Autowired
+   private NaverDAO nDao;
    // 사용자에 요청 따라 => 처리 
    @GetMapping("main/main.do")
-   public String main_main(Model model)
+   public String main_main(String fd,Model model)
    {
+	   if(fd==null)
+		   fd="맛집";
+	   
+	   List<NewsVO> nList=mgr.newsFind(fd);
 	   RecipeVO rvo=rService.recipeMaxHitData();
 	   List<RecipeVO> rList=rService.recipeHitTop8();
 	   List<FoodVO> fList=fService.foodHitTop5();
@@ -117,11 +136,37 @@ public class MainController {
 	   model.addAttribute("rvo", rvo);
 	   model.addAttribute("rList", rList);
 	   model.addAttribute("fList", fList);
+	   model.addAttribute("nList", nList);
+	   
+	   String data=nDao.naverSelectData();
+	   String key=youtubeGetKey(data);
+	   System.out.println(key);
+	   model.addAttribute("key", key);
 	   return "main";
    }
    @GetMapping("chat/chat.do")
    public String chat_chat()
    {
 	   return "site/chat/chat";
+   }
+   public String youtubeGetKey(String word)
+   {
+	   String key="";
+	   try
+	   {
+		   Document doc=Jsoup.connect("https://www.youtube.com/results?search_query="+
+	                                  URLEncoder.encode(word,"UTF-8")).get();
+		   Pattern p=Pattern.compile("/watch\\?v=[^가-힣]+");
+		   Matcher m=p.matcher(doc.toString());
+		   while(m.find())
+		   {
+			   String s=m.group();
+			   System.out.println(s);
+			   key=s.substring(s.indexOf("=")+1,s.indexOf("\""));
+			   break;
+		   }
+		   
+	   }catch(Exception ex){}
+	   return key;
    }
 }

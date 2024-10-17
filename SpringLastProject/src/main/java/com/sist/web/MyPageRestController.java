@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.sist.vo.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.service.*;
+import com.sist.task.ApiExplorer;
 
 @RestController
 public class MyPageRestController {
@@ -37,6 +38,14 @@ public class MyPageRestController {
 	  ObjectMapper mapper=new ObjectMapper();
 	  String json=mapper.writeValueAsString(list);
 	  
+	  return json;
+  }
+  @GetMapping(value="mypage/mypage_home_vue.do",produces = "text/plain;charset=UTF-8")
+  public String mypage_home(int no) throws Exception
+  {
+	  List<CctvVO> list=ApiExplorer.cctvData(no);
+	  ObjectMapper mapper=new ObjectMapper();
+	  String json=mapper.writeValueAsString(list);
 	  return json;
   }
 }

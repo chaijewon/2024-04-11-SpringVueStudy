@@ -106,7 +106,7 @@
                                   <a href="../reserve/reserve_main.do" class="btn btn-xs btn-info">예약</a>
                                  </c:if>
                                   <a href="../food/list.do" class="btn btn-xs btn-warning">목록</a>
-                                  <a href="http://127.0.0.1:8000/web/" class="btn btn-xs btn-warning">실시간 교통사항</a>
+                                  <a href="http://127.0.0.1:8000/web/food/?no=1" class="btn btn-xs btn-warning">실시간 교통사항</a>
                                 </td>
                               </tr>
                               <tr>

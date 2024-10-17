@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<response>
+<header>
+<resultCode>0</resultCode>
+<resultMsg>SUCCESS</resultMsg>
+</header>
+<body>
+<totalCount>6</totalCount>
+<items>
+<item>
+  <type>고속도로</type>
+  <eventType>공사</eventType>
+  <eventDetailType>작업</eventDetailType>
+  <startDate>20241016084631</startDate><coordX>127.5205</coordX><coordY>34.9022</coordY><linkId>3260227202</linkId><roadName>남해선(영암-순천)</roadName><roadNo>101</roadNo><roadDrcType>종점</roadDrcType><lanesBlockType/><lanesBlocked>2차로 차단</lanesBlocked><message>(2차로)시설물보수작업중</message><endDate/></item><item><type>고속도로</type><eventType>공사</eventType><eventDetailType>작업</eventDetailType><startDate>20241016084003</startDate><coordX>127.809</coordX><coordY>34.999</coordY><linkId>3940391600</linkId><roadName>남해선(순천-부산)</roadName><roadNo>10</roadNo><roadDrcType>종점</roadDrcType><lanesBlockType/><lanesBlocked/><message>(갓길)배수로정비작업중</message><endDate/></item><item><type>고속도로</type><eventType>공사</eventType><eventDetailType>작업</eventDetailType><startDate>20241016090007</startDate><coordX>127.3204</coordX><coordY>35.029</coordY><linkId>3260041681</linkId><roadName>호남선</roadName><roadNo>25</roadNo><roadDrcType>기점</roadDrcType><lanesBlockType/><lanesBlocked>1차로 차단</lanesBlocked><message>(1차로)시설물보수작업중</message><endDate/></item><item><type>고속도로</type><eventType>공사</eventType><eventDetailType>작업</eventDetailType><startDate>20241016075917</startDate><coordX>127.5285</coordX><coordY>34.9987</coordY><linkId>3260218100</linkId><roadName>순천완주선</roadName><roadNo>27</roadNo><roadDrcType>종점</roadDrcType><lanesBlockType/><lanesBlocked>2차로 차단</lanesBlocked><message>(2차로)시설물보수작업중</message><endDate/></item><item><type>국도</type><eventType>공사</eventType><eventDetailType>시설물보수작업</eventDetailType><startDate>20241002000000</startDate><coordX>127.65963</coordX><coordY>34.93869</coordY><linkId>3280509100</linkId><roadName>국도2호선</roadName><roadNo>2</roadNo><roadDrcType>종점방향</roadDrcType><lanesBlockType/><lanesBlocked>1 차로</lanesBlocked><message/><endDate/></item><item><type>국도</type><eventType>공사</eventType><eventDetailType>시설물보수작업</eventDetailType><startDate>20241015000000</startDate><coordX>127.59593</coordX><coordY>34.93801</coordY><linkId>3280502400</linkId><roadName>국도2호선</roadName><roadNo>2</roadNo><roadDrcType>종점방향</roadDrcType><lanesBlockType/><lanesBlocked/><message/><endDate/></item></items></body></response>
