@@ -1,6 +1,8 @@
 package com.sist.dao;
 
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.mapping.StatementType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.*;
@@ -51,14 +53,14 @@ public class SeoulDAO {
    {
 	   return mapper.seoulNatureTotalPage();
    }
-   public List<SeoulVO> seoulShopListData(Map map)
+   /*public List<SeoulVO> seoulShopListData(Map map)
    {
 	   return mapper.seoulShopListData(map);
-   }
-   public int seoulShopTotalPage()
+   }*/
+   /*public int seoulShopTotalPage()
    {
 	   return mapper.seoulShopTotalPage();
-   }
+   }*/
    /*
     *   @Select("SELECT no,title,poster,msg,address "
 		  +"FROM project_seoul_location "
@@ -83,8 +85,31 @@ public class SeoulDAO {
    {
 	   return mapper.seoulNatureDataData(no);
    }
-   public SeoulVO seoulShopDataData(int no)
+   /*public SeoulVO seoulShopDataData(int no)
    {
 	   return mapper.seoulShopDataData(no);
+   }*/
+   /*@Select(value="{CALL seoulShopListData(#{pStart,mode=IN,javaType=java.lang.Integer},"
+		   +"#{pEnd,mode=IN,javaType=java.lang.Integer},#{pResult,mode=OUT,jdbcType=CURSOR})}")
+   @Options(statementType = StatementType.CALLABLE)*/
+   // Statement , PreparedStatement(default) , CallableStatement(procedure호출)
+   public List<SeoulVO> seoulShopListData(Map map)
+   {
+	   mapper.seoulShopListData(map);
+	   return (List<SeoulVO>)map.get("pResult");
+   }
+   //@Select(value="{CALL seoulShopTotalPage(#{pTotal,mode=OUT,javaType=java.lang.Integer})}")
+   //@Options(statementType = StatementType.CALLABLE)
+   public int seoulShopTotalPage()
+   {
+	   return mapper.seoulShopTotalPage();
+   }
+   //@Select(value="{CALL seoulShopDetailData(#{pNo,javaType=java.lang.Integer,mode=IN},"
+   //      +"#{pResult,mode=OUT,jdbcType=CURSOR})}")
+   // @Options(statementType = StatementType.CALLABLE)
+   public SeoulVO seoulShopDetailData(Map map)
+   {
+	   mapper.seoulShopDetailData(map);
+	   return (SeoulVO)map.get("pResult");
    }
 }
