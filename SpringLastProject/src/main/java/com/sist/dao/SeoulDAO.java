@@ -110,6 +110,7 @@ public class SeoulDAO {
    public SeoulVO seoulShopDetailData(Map map)
    {
 	   mapper.seoulShopDetailData(map);
-	   return (SeoulVO)map.get("pResult");
+	   List<SeoulVO> list=(List<SeoulVO>)map.get("pResult");
+	   return list.get(0);
    }
 }
