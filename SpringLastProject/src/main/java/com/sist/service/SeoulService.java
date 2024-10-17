@@ -15,5 +15,10 @@ public interface SeoulService {
 	public int seoulNatureTotalPage();
 	public int seoulLocationTotalPage();
 	public int seoulShopTotalPage();
+	
+	public SeoulVO seoulLocationDataData(int no);
+	public SeoulVO seoulNatureDataData(int no);
+    public SeoulVO seoulShopDataData(int no);
+	  
 	   
 }

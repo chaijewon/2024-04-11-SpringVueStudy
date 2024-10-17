@@ -49,7 +49,7 @@
                     <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
                         <!-- Post Thumb -->
                         <div class="post-thumb">
-                           <a :href="'../seoul/loc_detail.do?no='+vo.no">
+                           <a :href="'../seoul/shop_detail.do?no='+vo.no">
                             <img :src="vo.poster" style="width: 350px;height: 200px"
                              onerror="../img/icon/noimage.png"
                             >

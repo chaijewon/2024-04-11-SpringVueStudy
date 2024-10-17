@@ -45,6 +45,24 @@ public class SeoulServiceImpl implements SeoulService{
 		// TODO Auto-generated method stub
 		return sDao.seoulShopTotalPage();
 	}
+
+	@Override
+	public SeoulVO seoulLocationDataData(int no) {
+		// TODO Auto-generated method stub
+		return sDao.seoulLocationDataData(no);
+	}
+
+	@Override
+	public SeoulVO seoulNatureDataData(int no) {
+		// TODO Auto-generated method stub
+		return sDao.seoulNatureDataData(no);
+	}
+
+	@Override
+	public SeoulVO seoulShopDataData(int no) {
+		// TODO Auto-generated method stub
+		return sDao.seoulShopDataData(no);
+	}
     
     
 }

@@ -138,10 +138,10 @@ public class MainController {
 	   model.addAttribute("fList", fList);
 	   model.addAttribute("nList", nList);
 	   
-	   String data=nDao.naverSelectData();
+	   /*String data=nDao.naverSelectData();
 	   String key=youtubeGetKey(data);
 	   System.out.println(key);
-	   model.addAttribute("key", key);
+	   model.addAttribute("key", key);*/
 	   return "main";
    }
    @GetMapping("chat/chat.do")

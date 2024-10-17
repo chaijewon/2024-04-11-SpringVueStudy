@@ -32,4 +32,22 @@ public class SeoulController {
 	   model.addAttribute("today", today);
 	   return "seoul/weather";   
    }
+   @GetMapping("seoul/location_detail.do")
+   public String location_detail(int no,Model model)
+   {
+	   model.addAttribute("no", no);
+	   return "seoul/location_detail";
+   }
+   @GetMapping("seoul/nature_detail.do")
+   public String nature_detail(int no,Model model)
+   {
+	   model.addAttribute("no", no);
+	   return "seoul/nature_detail";
+   }
+   @GetMapping("seoul/shop_detail.do")
+   public String shop_detail(int no,Model model)
+   {
+	   model.addAttribute("no", no);
+	   return "seoul/shop_detail";
+   }
 }

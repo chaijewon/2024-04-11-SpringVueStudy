@@ -35,4 +35,20 @@ public interface SeoulMapper {
    
    @Select("SELECT CEIL(COUNT(*)/12.0) FROM project_seoul_shop")
    public int seoulShopTotalPage();
+   
+   // private String title,poster,msg,address;
+   @Select("SELECT no,title,poster,msg,address "
+		  +"FROM project_seoul_location "
+		  +"WHERE no=#{no}")
+   public SeoulVO seoulLocationDataData(int no);
+   
+   @Select("SELECT no,title,poster,msg,address "
+			  +"FROM project_seoul_nature "
+			  +"WHERE no=#{no}")
+   public SeoulVO seoulNatureDataData(int no);
+   
+   @Select("SELECT no,title,poster,msg,address "
+			  +"FROM project_seoul_shop "
+			  +"WHERE no=#{no}")
+   public SeoulVO seoulShopDataData(int no);
 }

@@ -110,4 +110,22 @@ public class SeoulRestController {
 	  
 	  return json;
   }
+  @GetMapping(value="seoul/location_detail_vue.do",produces = "text/plain;charset=UTF-8")
+  public String location_detail(int no) throws Exception
+  {
+	  // 03045 서울 종로구 삼청로 37 (세종로, 국립민속박물관)
+	  SeoulVO vo=sService.seoulLocationDataData(no);
+	  String addr1=vo.getAddress();
+	  addr1=addr1.substring(addr1.indexOf(" ")+1);
+	  String addr2=addr1.trim();
+	  addr2=addr2.substring(addr2.indexOf(" ")+1);
+	  String addr3=addr2.trim();
+	  addr3=addr3.substring(0,addr3.indexOf(" "));
+	  vo.setAddr(addr3.trim());
+	  System.out.println("주소:"+vo.getAddr());
+	  
+	  ObjectMapper mapper=new ObjectMapper();
+	  String json=mapper.writeValueAsString(vo);
+	  return json;
+  }
 }

@@ -59,4 +59,32 @@ public class SeoulDAO {
    {
 	   return mapper.seoulShopTotalPage();
    }
+   /*
+    *   @Select("SELECT no,title,poster,msg,address "
+		  +"FROM project_seoul_location "
+		  +"WHERE no=#{no}")
+	   public SeoulVO seoulLocationDataData(int no);
+	   
+	   @Select("SELECT no,title,poster,msg,address "
+				  +"FROM project_seoul_nature "
+				  +"WHERE no=#{no}")
+	   public SeoulVO seoulNatureDataData(int no);
+	   
+	   @Select("SELECT no,title,poster,msg,address "
+				  +"FROM project_seoul_shop "
+				  +"WHERE no=#{no}")
+	   public SeoulVO seoulShopDataData(int no);
+    */
+   public SeoulVO seoulLocationDataData(int no)
+   {
+	   return mapper.seoulLocationDataData(no);
+   }
+   public SeoulVO seoulNatureDataData(int no)
+   {
+	   return mapper.seoulNatureDataData(no);
+   }
+   public SeoulVO seoulShopDataData(int no)
+   {
+	   return mapper.seoulShopDataData(no);
+   }
 }
