@@ -137,11 +137,19 @@ public class MainController {
 	   model.addAttribute("rList", rList);
 	   model.addAttribute("fList", fList);
 	   model.addAttribute("nList", nList);
-	   
-	   /*String data=nDao.naverSelectData();
+	   /*
+	    *   CREATE TABLE naverData(
+			   no NUMBER,
+			   word VARCHAR2(300) CONSTRAINT nd_word_nn NOT NULL,
+			   CONSTRAINT nd_no_pk PRIMARY KEY(no)
+			);
+			
+			<embed src="http://youtube.com/embed/${key }" style="width:100%"></embed>
+	    */
+	   String data=nDao.naverSelectData();
 	   String key=youtubeGetKey(data);
 	   System.out.println(key);
-	   model.addAttribute("key", key);*/
+	   model.addAttribute("key", key);
 	   return "main";
    }
    @GetMapping("chat/chat.do")
