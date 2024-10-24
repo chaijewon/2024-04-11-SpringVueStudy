@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <!-- 
+      elasticsearch : 문서형 데이터베이스 
+         => JSON형태로 저장 
+         => 데이터 수집 => 검색 엔진 (루씬 => 검색 라이브러리 => 구글)
+         => 대용량 데이터 수집 / 실시간 
+            검색속도가 빠르다 ...
+            index => table명 
+         => http://localhost:9200/index명/_search?q=(컬럼명)=검색어 
+         
+     -->
+     <context:component-scan base-package="com.sist.*"/>
+     <!-- 
+         구분자 : 메모리 할당 => new를 사용하지 않는다 
+             1. 일반 데이터형 (int , double ...) => 저장하는 메모리 크기 결정
+             2. 클래스는 메모리 크기를 JVM이 알 수 없다 
+                메모리를 확인 malloc(클래스)
+                           ============== 승격 new
+                           new 단점 : 결합성이 높은 프로그램 
+                                     ========== 다른 클래스에 영향을 미친다
+         @Component, 
+         @Repository, 
+         @Service, 
+         @Controller, 
+         @RestController, 
+         @ControllerAdvice, 
+         @Configuration
+      -->
+      <bean id="viewResolver"
+         class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+         p:prefix="/"
+         p:suffix=".jsp"
+       />
+</beans>

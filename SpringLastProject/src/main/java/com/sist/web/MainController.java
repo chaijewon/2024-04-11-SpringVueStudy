@@ -146,10 +146,10 @@ public class MainController {
 			
 			<embed src="http://youtube.com/embed/${key }" style="width:100%"></embed>
 	    */
-	   String data=nDao.naverSelectData();
+	   /*String data=nDao.naverSelectData();
 	   String key=youtubeGetKey(data);
 	   System.out.println(key);
-	   model.addAttribute("key", key);
+	   model.addAttribute("key", key);*/
 	   return "main";
    }
    @GetMapping("chat/chat.do")
