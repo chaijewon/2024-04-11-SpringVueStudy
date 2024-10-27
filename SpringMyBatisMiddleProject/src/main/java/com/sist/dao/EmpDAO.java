@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.sist.mapper.*;
 import com.sist.vo.EmpVO;
 @Repository
+
 public class EmpDAO {
    @Autowired
    private EmpMapper mapper;
