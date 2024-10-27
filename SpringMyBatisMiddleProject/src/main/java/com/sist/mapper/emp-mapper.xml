@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.EmpMapper">
-  <resultMap type="DeptVO" id="deptInfoMap">
-    <collection property="empList" javaType="java.util.ArrayList" 
-      select="empListData" column="deptno=deptno"
-    />
-  </resultMap>
-  <select id="empListData" resultMap="deptInfoMap" parameterType="int">
+  
+  <select id="empListData" resultType="com.sist.vo.EmpVO">
     SELECT empno,ename,job,hiredate as dbday,sal
     FROM emp
-    WHERE deptno=#{deptno}
   </select>
-  <select id="deptListData" resultType="DeptVO" parameterType="int">
-    SELECT * FROM dept
-    WHERE deptno=#{deptno}
+  <select id="empDeleteList" resultType="com.sist.vo.EmpVO" parameterType="hashmap">
+    SELECT empno,ename,job,hiredate as dbday, sal
+    FROM ${table_name}
   </select>
+  <delete id="allDelete" parameterType="int">
+	{
+		call
+		   declare
+		   BEGIN
+		      DELETE FROM emp_5  where empno=#{empno};
+		      DELETE FROM emp_6  where empno=#{empno};
+		      DELETE FROM emp_7  where empno=#{empno};
+		      DELETE FROM emp_8  where empno=#{empno};
+		      DELETE FROM emp_9  where empno=#{empno};
+		      DELETE FROM emp_10 where empno=#{empno};
+		   END
+	}
+	</delete>
 </mapper>
